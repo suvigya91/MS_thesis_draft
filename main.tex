@@ -92,22 +92,19 @@ framexleftmargin=5pt}
 \submissionmonth{October} 
 
 \abstract{
-The reliability of a developed software is very crucial and essential, since it makes sure software's credibility and user satisfaction in the application. A major challenge in the field of testing is to bridge the gap between the customer requirements and the actual outcome of the software. There are several tools in the field of chemical sciences for the Molecular Dynamics (MD) simulations. The EnsembleMD Toolkit is a Python framework for developing MD applications providing an abstraction that enables the efficient and dynamic usage of High Performance Computing (HPC), simultaneously hiding the complexity of allocation and execution in the underlying layers. 
+The reliability of a fully developed and error-free software is critical, since it determines a software's credibility and user satisfaction in the application. A major challenge in the field of testing is to bridge the gap between the customer requirements and the actual outcome of the software. There are several tools in the field of chemical sciences for Molecular Dynamics (MD) simulations. The EnsembleMD Toolkit is a Python framework for developing MD applications providing an abstraction that enables the efficient and dynamic usage of High Performance Computing (HPC), simultaneously hiding the complexity of allocation and execution in the underlying layers. 
 
-EnsembleMD toolkit facilitates a simple framework for MD application, but lacks the feature of testing the functionality during its software development cycle (SDC). Checking the errors and faults at all the stages of SDC, namely, development, deployment on supercomputers and run-time, is crucial to ensure the proper functioning of the scientific tools and applications.
+The EnsembleMD toolkit facilitates a simple framework for MD applications, but it lacks the feature of testing the functionality during its software development cycle (SDC). Checking the errors and faults at all stages of the SDC, namely, development, deployment on supercomputers and run-time, is crucial to ensure the proper functioning of the scientific tools and applications.
 
-The frequent changes in the system configuration of Supercomputers imposes the necessity of a platform which can provide sanity check of all the components and 
-modules. Hence, to address these requirements, we developed a Testing Framework. The framework has three primary design components: (1) Support of testing APIs of the toolkit during development, (2) Support for testing of faults during their deployment on supercomputers and (3) Support for logging the run-time exceptions and errors. This bench enables the developers of various scientific tools viz. EnsembleMD toolkit, Amber, CoCo etc to easily and scalably debug the issues faced by the end users. 
+The frequent changes in the system configuration of supercomputers imposes the necessity of a platform which can provide sanity check on all of the components and modules. Hence, to address these requirements, we developed a Testing Framework. The framework has three primary design components: (1) Support of testing APIs of the toolkit during development, (2) Support for testing of faults during their deployment on supercomputers and (3) Support for logging the run-time exceptions and errors. This bench enables the developers of various scientific tools viz. EnsembleMD toolkit, Amber, CoCo etc to easily and scalably debug the issues faced by the end users. 
 }
 
 \beforepreface
 
 \acknowledgements{
-First and foremost, I would like express my heartfelt gratitude to Dr. Shantenu Jha for having faith in me and giving me the opportunity to work on this project. I am very thankful to Dr. Jha for his encouragement and support through all the 
-years of my grad school, without his guidance it would not have been possible to finish this thesis. I would also like to thank Dr. Jha for the training, advice and motivation that kept me focused during the course of this project and 
-overcome both professional and personal challenges. \newline\newline
+First and foremost, I would like express my heartfelt gratitude to Dr. Shantenu Jha for having faith in me and giving me the opportunity to work on this project. I am very thankful to Dr. Jha for his encouragement and support through all the years of my grad school, Without his guidance it would not have been possible to finish this thesis. I would also like to thank Dr. Jha for the training, advice and motivation that kept me focused during the course of this project which helped me to overcome both professional and personal challenges. \newline\newline
 Besides my advisor, I would like to thank the rest of my thesis committee
-for their encouragement, insightful comments, and hard questions.\newline\newline
+for their encouragement, insightful comments, and challenging questions.\newline\newline
 I would like to thank Vivek, Antons and all members of the RADICAL team for their support and involvement in the development of this project. Without their passionate participation and input, the project could not have been successfully 
 completed. I am also grateful to the ExTASY team for their continuous feedback and support during the entire course of this thesis. I thank XSEDE and TACC for resources I used. I would also like to thank Rutgers University for providing me an opportunity to study here and nurture my career and future. \newline\newline
 Finally, I must express my very profound gratitude to my parents for providing me with unfailing support and continuous encouragement throughout the process of researching and writing this thesis. Love to Shubhangini, Gayatri and Ankit for your support. This accomplishment would not have been possible without them. Thank you!
@@ -127,9 +124,11 @@ Finally, I must express my very profound gratitude to my parents for providing m
 %%Chapter 1
 \chapter{Introduction}
 \section{Motivation}
- As supercomputers and High Processing Cluster increase in size and complexity, system failures have become inevitable \cite{ref7}. These failures have great impact on the available computing resources. Around 1.53\% of the total applications failed during the initial 518 production days of Blue Waters contributing 9\% of the total production node hours \cite{ref6}. These errors are reported not only because of the system failures but might also occur due to application or software bug. A software bug is an error in the programming and coding of the application that might cause it to malfunction. These bugs often have major impact on cost, money or time. Software testing is the primary way for assuring high quality of software tools. It is defined as a formal process in which a software unit, several integrated software units or an entire package are examined by running the programs on a computer with various inputs and expected outputs. All the associated tests are expected to generate results similar to the results generated during actual execution. Testing plays a central role in quality assurance of any application. Software failure can lead to serious consequences in safety critical and normal applications. In a software development cycle, testing is paramount during the development and pre-delivery phases of any software. Testing framework is essential for error control that can be categorized into Error detection and Error handling and correction. Error detection is most important stage for developing reliable and highly dependable computing as it deals with the detection of error generated due to software defects or hardware failures. The error report generated by the error detection phase can be used by the developers to handle and rectify the defects. Testing is a continuous cycle of error control mechanisms until software has negligible defects or the error lies in acceptance criteria. A plethora of applications has been developed to perform Molecular Dynamics simulations and analysis. Many of these applications in the field of molecular sciences use ensemble-based methods as their basis to make scientific progress. EnsembleMD toolkit is one such toolkit that provides abstraction layer for executing various scientific simulations where multiple computational execution units form a part of an ensemble referred to as tasks. 
+ As supercomputers and High Processing Cluster increase in size and complexity, system failures have become inevitable \cite{ref7}. These failures have a great impact on the available computing resources. Around 1.53\% of the total applications failed during the initial 518 production days of Blue Waters contributing to 9\% of the total production node hours \cite{ref6}. These errors are reported not only because of the system failures, but might also occur due to an application or software bug. A software bug is an error in the programming and coding of the application that might cause it to malfunction. These bugs often have a major impact on cost, money or time. Software failure can lead to serious consequences in safety critical and normal applications. Software testing is defined as a formal process in which a software unit, several integrated software units, or an entire package, are examined by running the programs on a computer with various inputs and expected outputs. It is the primary method for assuring high quality, error free software.  All the associated tests are expected to generate results similar to the results generated during actual execution. Testing plays a central role in quality assurance of any application. In a software development cycle, testing is paramount during the development and pre-delivery phases of any software. 
+ 
+ A Testing framework is essential for error control that can be categorized into error detection and error handling and correction. Error detection is the most important stage for developing reliable and highly dependable computing as it deals with the detection of error generated due to software defects or hardware failures. The error report generated by the error detection phase can be used by the developers to handle and rectify the defects. Testing is a continuous cycle of error control mechanisms which operates until the software has negligible defects or the error lies within the acceptance criteria. A plethora of applications has been developed to perform Molecular Dynamics simulations and analysis. Many of these applications in the field of molecular sciences use ensemble-based methods as their basis to make scientific progress. EnsembleMD toolkit is one such toolkit that provides abstraction layer for executing various scientific simulations where multiple computational execution units form a part of an ensemble referred to as tasks. 
 
-Traditionally, developers of EnsembleMD toolkit had to backtrace all the logs from supercomputers, logs from Radical-Pilot and EnsembleMD to debug any failure or exception issue. Job submission and execution on remote supercomputers may fail due to various factors, viz. failure due to bugs in source code, wrong kernel inputs, exception if connection to database fails, failed job submission or the modules and configurations specific to kernel and supercomputer is loaded incorrectly. This generally leads to multiple drawbacks. The major drawback is to isolate the error and exception causing component. It is cumbersome to debug innumerable logs and investigate the failures and faults. The failures and errors reported by the users using hardware or compilers that have not been extensively tested by the developers can cause loss of precious time and developers need to put efforts to identify and isolate the errors \cite{ref16}. As discussed earlier, detecting errors is crucial in error control mechanism of any test framework, aforementioned problem to detect errors in molecular dynamic application serves as the motivation for this thesis. The developers and the users of EnsembleMD toolkit and other scientific toolkit would benefit largely from this testing framework that encapsulates the following:
+Traditionally, developers of EnsembleMD toolkit had to backtrace all of the logs from supercomputers, logs from Radical-Pilot and EnsembleMD to debug any failure or exception issue. Job submission and execution on remote supercomputers may fail due to various factors, viz. failure due to bugs in source code, wrong kernel inputs, exception if connection to database fails, failed job submission or the modules and configurations specific to the kernel and supercomputer is loaded incorrectly. This generally leads to multiple drawbacks. The major drawback is that it isolates the error and exception causing component. It is cumbersome to debug innumerable logs and investigate the failures and faults. The failures and errors reported by the users using hardware or compilers that have not been extensively tested by the developers can cause loss of precious time and developers need to put efforts to identify and isolate the errors \cite{ref16}. As discussed earlier, detecting errors is crucial in error control mechanism of any test framework, aforementioned problem to detect errors in molecular dynamic application serves as the motivation for this thesis. The developers and the users of EnsembleMD toolkit and other scientific toolkits would benefit largely from this testing framework that encapsulates the following:
 
 \begin{itemize}
 	\item Automate the cumbersome process of debugging and isolating errors and exceptions.
@@ -140,7 +139,7 @@ Traditionally, developers of EnsembleMD toolkit had to backtrace all the logs fr
 \end{itemize} 
 
 \section{Objective}
-The main objective of this thesis is to develop a test framework to enable the validation of open source tool like EnsembleMD toolkit and RepEx and to test the proper functioning of all the APIs. Furthermore, the aim is also to develop a framework that tests the deployment and run-time errors which may occur while executing scientific tools on the remote supercomputers. The another objective is to analyze the requirements and develop an automated test bench for the developers with the following capabilities:
+The main objective of this thesis is to develop a test framework to enable the validation of open source tools like the EnsembleMD toolkit and RepEx and to test the proper functioning of all the APIs. Furthermore, the aim is also to develop a framework that tests the deployment and run-time errors which may occur while executing scientific tools on remote supercomputers. Another objective is to analyze the requirements and develop an automated test bench for the developers with the following capabilities:
 
 \begin{itemize}
     \item Enable a test bench to ensure that the development code meets its design.
@@ -150,38 +149,41 @@ The main objective of this thesis is to develop a test framework to enable the v
 \end{itemize}
    
 \section{Structure of the Thesis}
-After discussing about the motivation and objectives for this thesis in Chapter 1, we will discuss about the various research and related work in Chapter 2 followed by the discussion about the background of the Radical EnsembleMD toolkit and Radical RepEx framework in Chapter 3. In Chapter 4, we will discuss about the testing infrastructure, its significance and testing framework design for the toolkits. In Chapter 5, we will discuss about the development level testing of EnsembleMD and RepEx. Development level testing includes unit testing and end to end testing to ensure a bug-free tool. SATLite, standalone testing tool to test deployment and run-time errors will be discussed in Chapter 6. Chapter 7 illustrates the automated testing harness and integration with the Jenkins Continuous Integration (CI) server in depth along with the testing results. In Chapter 8, we arrive at the conclusion and discuss the foundations this thesis lays for future work. 
+After discussing the motivation and objectives for this thesis in Chapter 1, we will discuss the various research and related works in Chapter 2 followed by a discussion on the background of the Radical EnsembleMD toolkit and Radical RepEx framework in Chapter 3. In Chapter 4, we will explore the testing infrastructure, its significance and testing framework design for the toolkits. In Chapter 5, we will discuss the development level testing of EnsembleMD and RepEx. Development level testing includes unit testing and end to end testing to ensure a bug-free tool. SATLite, a standalone testing tool to test deployment and run-time errors will be discussed in Chapter 6. Chapter 7 illustrates the automated testing harness and integration with the Jenkins Continuous Integration (CI) server in depth along with the testing results. In Chapter 8, we arrive at the conclusion and discuss the foundations this thesis lays for future work. 
 
 %Chapter 2
 \chapter{Related Work}
-A large percentage of today's high computing performance and resources are wasted due to various failures. These failures significantly affect the capacity of HPC clusters. Designing an ideal fault-free high computing resources is unfeasible. There is always a trade-off between high processing computing and fault-free resources. Designing highly dependable system requires a good understanding of failures and its characteristics \cite{ref8}. The logs generated by the HPC clusters are abundant in number and mining these logs to detect the error is very cumbersome.
+A large percentage of today's high computing performance and resources are wasted due to various
+failures. These failures significantly affect the capacity of HPC clusters and the logs generated by the clusters are abundant in number and mining these logs to detect the error is very cumbersome.
+Unfortunately, designing an ideal fault-free high computing resources is unfeasible. However, there is always a trade-off between high processing computing and fault-free resources. We can design a highly dependable system by having a solid understanding of its failures and characteristics \cite{ref8}. 
 
-There is a continuous profound research in the field of testing the faults and errors generated in supercomputers and a large number of mining tools have been developed to study and analyze the logs. Martino et al.'s \cite{ref6} study of impact of system failures on the Blue Waters have showed greater effect on the available node hours. To study and analyze these failures, they developed \textit{LogDiver} which is a tool to automate the system log data processing. \textit{LogDiver} handles large amount of textual data extracted from system and application level logs and decodes the specific types of events and exit codes. Their study shows that probability of application failures due to system failures is just 0.162.
 
-Chuah et al. \cite{ref9} studied the root causes for the failures using system logs of Ranger supercomputer at the Texas Advanced Computing Center (TACC). \textit{FDig}, a diagnostic tool had been developed to extract the log entries as structured message templates to analyze the faults. \textit{FDig} detects the frequency of the specific errors by extracting the error template messages from the stored system logs and supports system administrators in the fault diagnostic processes. The research and development of the fault tolerant system is unremitting. 
+Current research in the field of testing the faults and errors generated in supercomputers and a large number of mining tools have been developed to study and analyze the logs. Martino et al.'s \cite{ref6} study on the impact of system failures on the Blue Waters had shown the effect on the available node hours. To study and analyze these failures, they developed \textit{LogDiver} which is a tool to automate the system log data processing. \textit{LogDiver} handles large amounts of textual data extracted from the system and application level logs and decodes the specific types of events and exit codes. Their study shows that probability of application failures due to system failures is just 0.162.
 
-The current ongoing research primarily focuses on providing fault tolerance strategies with an objective to minimize the fault and failure effects on system resource. Gainaru et al. \cite{ref12} extensively exploited the concepts of data mining techniques to determine system errors from the logs generated by Blue Gene/L machine. They have also used the signal analysis concepts to shape the normal behavior of the system events. Their study was focused on normal behavior of a system and the effects of faults on them.
+Chuah et al. \cite{ref9} studied the root causes for the failures using system logs of the Ranger supercomputer at the Texas Advanced Computing Center (TACC). \textit{FDig}, a diagnostic tool had been developed to extract the log entries as structured message templates to analyze the faults. \textit{FDig} detects the frequency of the specific errors by extracting the error template messages from the stored system logs and supports system administrators in the fault diagnostic processes. The research and development of the fault tolerant system is continuous. 
 
-According to \cite{ref6}, \cite{ref9}, \cite{ref13}, console logs are primary source of information about the condition of a cluster or HPC system. These error logs help system administrators to analyze the causes of system failures. Gurumdimma et al. \cite{ref13} developed a tool to increase time window by around 50 minutes between the first event of error message in the log file and the time of ensuing of the failure. This increase in the time window gives sufficient time to the administrators to save the state of the running applications, hence, saving large execution time. The development of their tool had basis on anomalies in the resource usage logs and mining of error logs for Ranger Supercomputer from TACC. Similar research has been conducted by Zheng et al. \cite{ref15} to develop FTC-Charm++, a fault-tolerant runtime based scheme for fast and scalable recovery of the applications on the HPC clusters. 
+The current ongoing research primarily focuses on providing fault tolerance strategies with an objective to minimize the fault and failure effects on system resources. Gainaru et al. \cite{ref12} extensively exploited the concepts of data mining techniques to determine system errors from the logs generated by Blue Gene/L machine. They have also used the signal analysis concepts to shape the normal behavior of the system events. Their study was focused on the normal behavior of a system and the effects of faults on the system.
 
-A study by Oliner et al. \cite{ref14} on the system logs from five supercomputers, namely, Blue Gene/L, Red Storm, Thunderbird, Spirit and Liberty to study failure alerts and actual failure shows that a large number of alerts are generated due to hardware issues but most of the system failures are due the software issues. The possible explanation of system failures is due to software upgrades. The applications running on these resources might not be compatible with the software upgrades and hence leads to their failure. 
+According to \cite{ref6}, \cite{ref9}, \cite{ref13}, console logs are a primary source of information about the condition of a cluster or HPC system. These error logs help system administrators to analyze the causes of system failures. Gurumdimma et al. \cite{ref13} developed a tool to increase the time window by around 50 minutes between the first event of error message in the log file and the time of ensuing of the failure. This increase in the time window gives sufficient time to the administrators to save the state of the running applications, hence, saving large execution time. The development of their tool had basis on anomalies in the resource usage logs and mining of error logs for Ranger Supercomputer from TACC. Similar research has been conducted by Zheng et al. \cite{ref15} to develop FTC-Charm++, a fault-tolerant runtime based scheme for fast and scalable recovery of the applications on the HPC clusters. 
 
-Analyzing the system logs forms the basis of various testing tools for the HPC clusters. Chen et al. \cite{ref10} have adopted Hidden Markov Model (HMM) \cite{ref11} along with the frequency analysis to predict job residual times. It is beneficial for the job scheduler to predict the status of every job for proper resource management. Chen and group's approach can predict 75\% of job's running times with an error of less than 200 seconds.  
+A study by Oliner et al. \cite{ref14} on the system logs from five supercomputers, namely, Blue Gene/L, Red Storm, Thunderbird, Spirit and Liberty which analyzed failure alerts and actual failure shows that a large number of alerts are generated due to hardware issues, but most of the system failures are due the software issues. A possible explanation of system failures is due to software upgrades. The applications running on these resources might not be compatible with the software upgrades and hence leads to their failure. 
 
-All the novel approaches discussed earlier in this section describes the strategies to anatomize the system logs and error log files to detect the system errors. These studies however show how to combat the effect of system failures and predict them to minimize the errors and faults. There is a scope of further improvement in the efficiency of resources if we can minimize the errors during application job submission. The large sector of computing resources is used by Molecular Dynamics simulations. These applications are responsible for complex simulation and analysis of various molecular structures. There is always a major cost associated if these molecular dynamics applications fail. The scientific simulation workflows such as Amber, CoCo etc. are the major tools in field of molecular dynamics domain. These workflows serve as input to various tools such as Radical EnsembleMD and Radical Pilot. With the advancement in these workflows, it is highly possible to have software bugs. In order to minimize the effect of application failures due to source code bugs, improper environment loading or transferring incorrect input files, we have developed a testing tool, \textit{Simple Application Testing Lite (SATLite)} to detect the application deployment level and run-time errors. The developers of scientific workflows can directly check for errors while their software is still under development, before releasing it to their user base. The dependency of these scientific simulation packages on different operating systems and HPC clusters remains undetected unless a full compilation is made, and errors with "make clean" \cite{ref16} can build successfully on a developer's machine but can fail on user machines. Betz et al. \cite{ref16} have discussed the effect of application bug with respect to AMBER development in depth. Since, major research in the field of HPC fault-tolerance system uses different logs, we have also used system and console log mining approach for designing our tool. 
+Analyzing the system logs forms the basis of various testing tools for the HPC clusters. Chen et al. \cite{ref10} have adopted Hidden Markov Model (HMM) \cite{ref11} along with the frequency analysis to predict job residual times. It is beneficial for the job scheduler to predict the status of every job for proper resource management. Chen and group's approach can predict 75\% of the job's running times with an error of less than 200 seconds.  
+
+All of the novel approaches discussed earlier in this section describes the strategies to anatomize the system logs and error log files to detect the system errors. These studies however show how to combat the effect of system failures and predict them to minimize the errors and faults. There is a window of opportunity for further improvement in the efficiency of resources if we can minimize the errors during application job submission. The large sector of computing resources is used by Molecular Dynamics simulations. These applications are responsible for complex simulation and analysis of various molecular structures. There is always a major cost associated if these molecular dynamics applications fail. The scientific simulation workflows such as Amber, CoCo, etc. are the major tools in the field of molecular dynamics domain. These workflows serve as input to various tools such as Radical EnsembleMD and Radical Pilot. With the advancement in these workflows, it is highly possible to have software bugs. In order to minimize the effect of application failures due to source code bugs, improper environment loading or transferring incorrect input files, we have developed a testing tool, \textit{Simple Application Testing Lite (SATLite)} to detect the application deployment level and run-time errors. The developers of scientific workflows can directly check for errors while their software is still under development, before releasing it to their user base. The dependency of these scientific simulation packages on different operating systems and HPC clusters remains undetected unless a full compilation is made, and errors with "make clean" \cite{ref16} can build successfully on a developer's machine, but can fail on user machines. Betz et al. \cite{ref16} have discussed the effect of application bugs with respect to AMBER development in depth. Since, major research in the field of HPC fault-tolerance system uses different logs, we have also used system and console log mining approach for designing our tool. 
 
 
 
 %%Chapter 3
 \chapter{Background of Radical Tools}
 \label{chap:background}
-Molecular Dynamics (MD) simulations is a key method to study protein structures, gene finding, sequence analysis etc. These simulations are highly important in the field of drug design and drug discovery to study active molecules and protein interaction sites \cite{ref1}. The gene sequence and protein structures are highly important in the detection of diseases, hence, the analysis of these components are highly critical and requires high computing processing. Due to the high complexity of the molecule structure, high performance and parallel computing provides a substantial improvement in time taken for various calculations. High performance computing (HPC) approach helps to minimizes the number of target drugs that is required to be tested by expensive and time-consuming synthesis and laboratory experiments [1]. There are several tools that provides interface for the MD simulations. ExTASY tools such as Amber, CoCo, Gromacs and LSDMap are the scientific tools for MD simulations, Radical-EnsembleMD toolkit and RepEx provides an interface for the resource handling and execution of the former tools on the remote HPC clusters. This chapter deals with the background discussion of the toolkit whose testing framework has been developed.
+Molecular Dynamics (MD) simulations is a key method to study protein structures, gene finding, sequence analysis etc. These simulations are highly important in the field of drug design and drug discovery to study active molecules and protein interaction sites \cite{ref1}. The gene sequence and protein structures are highly important in the detection of diseases, hence, the analysis of these components are highly critical and requires high computing processing. Due to the high complexity of the molecule structure, high performance and parallel computing provides a substantial improvement in time taken for various calculations. The High performance computing (HPC) approach helps to minimize the number of target drugs that is required to be tested by expensive and time-consuming synthesis and laboratory experiments [1]. There are several tools that provides interface for the MD simulations. ExTASY tools such as Amber, CoCo, Gromacs and LSDMap are the scientific tools for MD simulations. Radical-EnsembleMD toolkit (EnMDTK) and RepEx provides an interface for the resource handling and execution of the former tools on the remote HPC clusters. This chapter deals with the background discussion of the toolkit whose testing framework has been developed.
 
 \section{About EnsembleMD Toolkit}
-EnsembleMD Toolkit is a python based framework for developing, simulating and executing molecular science applications comprising of ensembles of simulations. This toolkit is designed to address the issues of decoupling of tasks, heterogeneity across them and the dependency between them \cite{ref3}, \cite{site1}. This provides a tool for MD applications which efficiently decouples the details of execution units and manages their submission on the remote machines. It provides abstraction to the users, hiding the complexity of the mechanism of job submission, execution and data transfer. EnsembleMD Toolkit (EnMDTK) provides a set of explicit, predefined patterns that are found in ensemble-based MD workflows \cite{ref2}, \cite{ref3}, \cite{site1} . Users have an advantage of picking up the patterns which represents their application and populate it with MD engines viz. Amber, Coco, Gromacs or LSDmap, represented by 'kernel' in the tool. Even though traditional tools gave complete control to users to manage MD applications, but, the major drawback was that user was required to have knowledge of load transfer, job submission or data flow control. Users were required to explicitly undergo these cumbersome tasks of resource allocation, job submission and execution. In case of EnMDTK, this complexity is hidden from the user, hence provide a simple yet efficient way to execute their application.
+EnsembleMD Toolkit is a python based framework for developing, simulating and executing molecular science applications comprising of ensembles of simulations. This toolkit is designed to address the issues of decoupling of tasks, heterogeneity across them and the dependency between them \cite{ref3}, \cite{site1}. This provides a tool for MD applications which efficiently decouples the details of execution units and manages their submission on the remote machines. It provides abstraction to the users, hiding the complexity of the mechanism of job submission, execution and data transfer. EnsembleMD Toolkit provides a set of explicit, predefined patterns that are found in ensemble-based MD workflows \cite{ref2}, \cite{ref3}, \cite{site1} . Users have an advantage of picking up the patterns which represents their application and populate it with MD engines viz. Amber, Coco, Gromacs or LSDmap, represented by 'kernel' in the tool. Even though traditional tools gave complete control to users to manage MD applications, the major drawback was that the user was required to have knowledge of load transfer, job submission or data flow control. Users were required to explicitly undergo these cumbersome tasks of resource allocation, job submission and execution. In case of EnMDTK, this complexity is hidden from the user, hence it provides a simple yet efficient way to execute their application.
 
 \subsection{Design of EnsembleMD Toolkit}
-Ensemble-based applications comprises of tasks that may vary in the type of coupling between them or the amount of information transfer between them. Each tasks, with or without coupling, have different computational requirements \cite{ref2}, \cite{ref3}. EnsembleMD Toolkit was designed with an aim to provide a framework for multiple tasks with varying coupling levels on different HPC clusters. The modular design of the tool serves as a building block to make MD application execution flexible and scalable.
+Ensemble-based applications comprises of tasks that may vary in the type of coupling between them or the amount of information transferred between them. Each of the tasks, with or without coupling, have different computational requirements \cite{ref2}, \cite{ref3}. EnsembleMD Toolkit was designed with an aim to provide a framework for multiple tasks with varying coupling levels on different HPC clusters. The modular design of the tool serves as a building block to make MD application execution flexible and scalable.
 
 Figure \ref{fig:enmd_arch} \cite{site1} shows the architecture of EnsembleMD toolkit. As depicted in the figure, execution of any MD application takes place in five steps, namely:
 
@@ -201,17 +203,17 @@ Figure \ref{fig:enmd_arch} \cite{site1} shows the architecture of EnsembleMD too
   \label{fig:enmd_arch}
 \end{figure}
 
-\section{EnsembleMD toolkit components}
+\section{EnsembleMD Toolkit Components}
 As discussed in the above steps, EnsembleMD tool architecture comprises of four basic components showcasing the heterogeneous property of the tool that are described in details in subsequent subsections.
 
 \subsection{Execution Patterns}
-Molecular Dynamics application control flow can categorized into few repeating types. EnsembleMD tool exploits this characteristic to define a high level object describing the control flow or {\em"what to do"} at different stages. An execution pattern represented by \textbf{{1}} in figure \ref{fig:enmd_arch}, describes a parameterized container which can hold and execute ensembles. 
+MD application control flow can be categorized into a few repeating types. EnsembleMD tool exploits this characteristic to define a high level object describing the control flow or {\em"what to do"} at different stages. An execution pattern represented by \textbf{{1}} in figure \ref{fig:enmd_arch} describes a parameterized container which can hold and execute ensembles. 
 
 \subsection{Kernel Plugins}
-A Kernel plug-in represented by \textbf{{2}} in figure \ref{fig:enmd_arch}, is an object that abstracts a computational task in this toolkit. It represents the instantiation of a specific science tool along with the required software environment. Kernel hide tool-specific peculiarities across different clusters as well as differences between the interfaces of the various MD tools to the extent possible. 
+A Kernel plug-in represented by \textbf{{2}} in figure \ref{fig:enmd_arch} is an object that abstracts a computational task in this toolkit. It represents the instantiation of a specific science tool along with the required software environment. Kernel hide tool-specific peculiarities across different clusters as well as differences between the interfaces of the various MD tools to the extent possible. 
 
 \subsection{Resource Handler}
-The resource handler represented by \textbf{{3}} in figure \ref{fig:enmd_arch}, manages the resources for various job submission and execution on HPC cluster. It provides the following methods:
+The resource handler represented by \textbf{{3}} in figure \ref{fig:enmd_arch} manages the resources for various job submission and execution on HPC cluster. It provides the following methods:
 \begin{itemize}
 	\item Allocate resource
 	\item Run execution pattern on allocated resource
@@ -219,11 +221,11 @@ The resource handler represented by \textbf{{3}} in figure \ref{fig:enmd_arch}, 
 \end{itemize}
 
 \subsection{Execution Plugin}
-The execution plugin represented by \textbf{{4}} in figure \ref{fig:enmd_arch}, is an internal component of the toolkit managing the execution of the execution patterns. This layer binds the execution pattern with the kernel plugins, hence, generating the executable units which are forwarded to the underlying runtime system along with the resource details. This plugin decouples the execution plugin into executable plugin enhancing the runtime optimization of various parameters, viz. time to completion, throughput etc. 
-As we have discussed earlier, EnsembleMD toolkit is an abstraction tool which hides the complexity within the underlying layers and just exposing the plugins to the users. Execution pattern, kernel plugin and resource handlers are exposed to the users, whereas execution plugin manages the underlying complexity of decoupling the tasks, binding patterns and plugins, job submission, job execution and data transfer. This hidden complexity is addressed by the Radical-Pilot layer, which is the most crucial component of the toolkit architecture. 
+The execution plugin represented by \textbf{{4}} in figure \ref{fig:enmd_arch} is an internal component of the toolkit managing the execution of the execution patterns. This layer binds the execution pattern with the kernel plugins, hence, generating the executable units which are forwarded to the underlying runtime system along with the resource details. This plugin decouples the execution plugin into an executable plugin enhancing the runtime optimization of various parameters, viz. time to completion, throughput etc. 
+As we have discussed earlier, the EnsembleMD toolkit is an abstraction tool which hides the complexity within the underlying layers and only exposes the plugins to the users. Execution pattern, kernel plugin and resource handlers are exposed to the users, whereas execution plugin manages the underlying complexity of decoupling the tasks, binding patterns and plugins, job submission, job execution and data transfer. This hidden complexity is addressed by the Radical-Pilot layer, which is the most crucial component of the toolkit architecture. 
 
 \subsection{Radical Pilot}
-Radical-Pilot is a Pilot job framework which allows users to run large number of computational tasks simultaneously on one or more different distributed systems such as remote HPC clusters. A Pilot-job is responsible for acquiring resources necessary to execute the computational units on HPC cluster. The Pilot-job submits the jobs or the units to the system's batch queue. These pilot jobs are the containers that carries number of tasks or executable within itself. Once these pilot jobs becomes active, it can run sub-jobs directly, by eliminating the need to submit a separate job for each executable differently and hence, reducing time-to-completion. Radical Pilot provides task-level parallelism, by executing large number of tasks concurrently on HPC cluster. In other words, typically in absence of any such job submission framework, if the application has a complex workflow that requires several tasks to be executed, each task or job is required to be submitted individually with the queue wait time. This call for a resource management framework that can effectively submit parallel jobs, hence, enhancing the effective use of the available resources.
+Radical-Pilot is a Pilot job framework which allows users to run a large number of computational tasks simultaneously on one or more different distributed systems such as remote HPC clusters. A Pilot-job is responsible for acquiring resources necessary to execute the computational units on the HPC cluster. The Pilot-job submits the jobs or the units to the system's batch queue. These pilot jobs are the containers that carries the number of tasks or executable within itself. Once these pilot jobs becomes active, it can run sub-jobs directly, by eliminating the need to submit a separate job for each executable differently and hence, reducing time-to-completion. Radical Pilot provides task-level parallelism, by executing a large number of tasks concurrently on the HPC cluster. In other words, typically in absence of any such job submission framework, if the application has a complex workflow that requires several tasks to be executed, each task or job is required to be submitted individually with the queue wait time. This call for a resource management framework can effectively submit parallel jobs, hence, enhancing the effective use of the available resources.
 
 \begin{comment}
 \subsection{Architecture: Radical-Pilot}
@@ -254,10 +256,10 @@ The Pilot Agents after becoming active on the remote resource, pulls these Compu
 \end{comment}
 
 \section{Patterns in EnsembleMD Toolkit}
-As discussed earlier, the work flow in molecular sciences applications can be categorized into repeating types, motivating the developers to create an abstraction layer called "patterns". EnsembleMD toolkit has four patterns which envelopes almost all the MD applications. The next few subsections will discuss the different types of "patters".
+As discussed earlier, the work flow in molecular sciences applications can be categorized into repeating types, motivating the developers to create an abstraction layer called "patterns." EnsembleMD toolkit has four patterns which envelopes almost all the MD applications. The next few subsections will discuss the different types of "pattern.s"
 
 \subsection{Pipeline}
-A pipeline pattern consists of sequence of executable stages. The EnsembleMD toolkit pipeline pattern as shown in figure \ref{fig:pipeline} \cite{site1} is the primary pattern that consists of a bag of independent tasks that contains heterogeneous workloads. The data flow and control mechanism is always unidirectional and follows a linear pattern. Each pipeline stage though have dependency on previous stage, executes independently. 
+A pipeline pattern consists of a sequence of executable stages. The EnsembleMD toolkit pipeline pattern, as shown in figure \ref{fig:pipeline} \cite{site1}, is the primary pattern that consists of a container of independent tasks that contains heterogeneous workloads. The data flow and control mechanism is always unidirectional and follows a linear pattern. Each pipeline stage might have dependency from previous stage and executes independently. 
 \begin{figure}
   \centering
   \includegraphics[width=12cm,height=8cm]{pipeline_pattern.png}
@@ -268,8 +270,7 @@ A pipeline pattern consists of sequence of executable stages. The EnsembleMD too
 
 \subsection{AllPairs}
 The All-pairs problem is stated as:
-All-Pairs(set A, set B, function F) returns a matrix M which is composed by com-
-paring all elements of set A to all elements of set B using the function F. Otherwise
+All-Pairs(set A, set B, function F) returns a matrix M which is composed by comparing all elements of set A to all elements of set B using the function F. Otherwise
 stated as, M[i,j] = F(A[i],B[j])[12]. A pictorial representation is given in Figure \ref{fig:allpairs}
 \begin{figure}
   \centering
@@ -281,18 +282,18 @@ stated as, M[i,j] = F(A[i],B[j])[12]. A pictorial representation is given in Fig
 
 \subsection{Replica Exchange}
 
-Replica Exchange pattern is a generalization of Replica Exchange Molecular Dynamics (REMD) conformational algorithm \cite{ref4} and is divided into two stages, namely: Simulation stage and Execution stage. Replica Exchange pattern starts with each replica propagating simulation phase independently, followed by exchange phase where exchange of thermodynamic patterns takes place. This exchange is determined on the basis of the results of simulation phase. Figure \ref{fig:repex1} \cite{site1} depicts execution of simulation and exchange phase with various degree of concurrency depending on the number of iterations.
+Replica Exchange pattern is a generalization of Replica Exchange Molecular Dynamics (REMD) conformational algorithm \cite{ref4} and is divided into two stages, namely: Simulation stage and Execution stage. The Replica Exchange pattern starts with each replica propagating simulation phase independently, followed by the exchange phase where exchange of thermodynamic patterns takes place. This exchange is determined on the basis of the results of simulation phase. Figure \ref{fig:repex1} \cite{site1} depicts execution of simulation and exchange phase with various degree of concurrency depending on the number of iterations.
 
 \begin{figure}
   \centering
-  \includegraphics[width=13cm,height=10cm]{repex.png}
+  \includegraphics[width=12cm,height=9cm]{repex.png}
   \hbox{\small\itshape Credit: EnsembleMD toolkit architecture document \cite{site1}}
   \caption{Replica Exchange Pattern}
   \label{fig:repex1}
 \end{figure}
 
 \subsection{Simulation Analysis Loop}
-The Simulation Analysis Loop pattern is divided into two phases of simulation instances and analysis instances. There are also pre\_loop and post\_loop stages which are outside this interative sequence. In the MD applications, Simulation Analysis Loop pattern is executed with multiple iterations of simulation tools and analysis tools till the convergence criteria is reached. Figure \ref{fig:sal} depicts N simulation instances and M analysis instances in each loop.
+The Simulation Analysis Loop pattern is divided into two phases of simulation instances and analysis instances. There are also pre\_loop and post\_loop stages which are outside this interative sequence. In the MD applications, the Simulation Analysis Loop pattern is executed with multiple iterations of simulation tools and analysis tools untill the convergence criteria is reached. Figure \ref{fig:sal} depicts N simulation instances and M analysis instances in each loop.
 
 \begin{figure}
   \centering
@@ -306,12 +307,12 @@ The Simulation Analysis Loop pattern is divided into two phases of simulation in
 This section focuses on the flow of application using EnsembleMD toolkit. Figure \ref{fig:modulesofenmd} shows the execution flow of the applications using EnsembleMD tool. At the start of execution, \texttt{radical.entk.Sin
 -gleClusterEnvironment} is invoked that calls \texttt{radical.entk.Engine}. Engine module coordinates the patterns and kernel plugins. Engine invokes the loading of all the available patterns, namely, \texttt{radical.entk.pipeline},  \texttt{radical.ensemblemd.exec\_plugins.simulation\_analysis\_loop},  \texttt{radic
 -al.ensemblemd.exec\_plugins.replica\_exchange} and \texttt{radical.ensemblemd.exec\_plugins.allp
--airs}. If all the patterns are loaded successfully, the execution proceeds to kernel plug-in loading phase; otherwise, it raises exception. This is pattern loading phase taking around 0.0065 seconds.
+-airs}. If all of the patterns are loaded successfully, the execution proceeds to the kernel plug-in loading phase; otherwise, it raises exception. This is pattern loading phase takes around 0.0065 seconds.
 
-Next, \texttt{radical.entk.Engine} invokes \texttt{radical.ensemblemd.kernel\_plugins} module and loads all the pre-defined kernels. These loaded kernels are both scientific and miscellaneous. This is kernel plugin loading phase which takes around 0.052 seconds. The successful kernel loading process to the resource allocation stage.
+Next, \texttt{radical.entk.Engine} invokes \texttt{radical.ensemblemd.kernel\_plugins} module and loads all the pre-defined kernels. These loaded kernels are both scientific and miscellaneous. This is kernel plugin loading phase takes around 0.052 seconds. The successful kernel loading process then proceeds to the resource allocation stage.
 
-In resource allocation stage, control is transferred back to \texttt{radical.entk.SingleClusterEnviron
--ment} module which is responsible for securing resources on the target machine as requested by the application. On a successful allocation of resource, all the required files are transferred to the target machine, but an exception is raised if the allocation fails and the application exits the execution. Next, the pattern and kernel plugins requested by the application are verified. The next stage is the execution of application on the target machine. After successful execution, EnsembleMD prepares for the de-allocation of the resources. This step is necessary in order to free the reserved resources on the target machine. If de-allocation process is successful, EnsembleMD exits with a success command and downloads all the results and outputs, but raises exception if there is any error in any stage of the execution process.
+In the resource allocation stage, control is transferred back to \texttt{radical.entk.SingleClusterEnvi
+-ronment} module which is responsible for securing resources on the target machine as requested by the application. On a successful allocation of resource, all the required files are transferred to the target machine, but an exception is raised if the allocation fails and the application exits the execution. Next, the pattern and kernel plugins requested by the application are verified. The next stage is the execution of application on the target machine. After successful execution, EnsembleMD prepares for the de-allocation of the resources. This step is necessary in order to free the reserved resources on the target machine. If the de-allocation process is successful, EnsembleMD exits with a success command and downloads all of the results and outputs, but raises exception if there is any error in any stage of the execution process.
 
 \begin{figure}
   \centering
@@ -345,7 +346,7 @@ In resource allocation stage, control is transferred back to \texttt{radical.ent
 
 
 \section{Radical RepEx Framework}
-RepEx is a framework for replica exchange molecular dynamics simulations over multiple dimensions. Replica exchange simulation deals with the exchange of thermodynamic information such as temperature, salt concentration or umbrella during molecule interactions, hence supporting 3-dimensional REMD simulations with arbitrary ordering of the available exchange types \cite{ref5}, \cite{site2}.  There are large number of REMD simulation tools that handles synchronous replica exchanges. In synchronous replica exchange, all the replicas must finish simulation phase before moving to next stage, i.e. transition phase \cite{ref5}. RepEx framework not only supports synchronous exchanges, but, it also manages the replicas that does not have global synchronization between the two stages, namely, simulation and exchange phase as shown in figure \ref{fig:repex}. This framework also handles resource allocation on for the HPC clusters using underlying Radical Pilot layer.
+RepEx is a framework for replica exchange molecular dynamics simulations over multiple dimensions. Replica exchange simulation deals with the exchange of thermodynamic information such as temperature, salt concentration or umbrella during molecule interactions, hence supporting 3-dimensional REMD simulations with arbitrary ordering of the available exchange types \cite{ref5}, \cite{site2}.  There are a large number of REMD simulation tools that handles synchronous replica exchanges. In synchronous replica exchange, all the replicas must finish the simulation phase before moving to the next stage, i.e. transition phase \cite{ref5}. RepEx framework not only supports synchronous exchanges, but, it also manages the replicas that do not have global synchronization between the two stages, namely, simulation and exchange phase as shown in figure \ref{fig:repex}. This framework also handles resource allocation for the HPC clusters using underlying Radical Pilot layer.
 
 \begin{figure}
 
@@ -371,20 +372,20 @@ RepEx is a framework for replica exchange molecular dynamics simulations over mu
 \end{figure}
 
 
-The main objective for the development of RepEx is to solve the concerns of scientific community to implement REMD algorithms with large number of exchanged parameters simultaneously providing a scalable platform with concealed simulation details.
+The main objective for the development of RepEx is to solve the concerns of the scientific community to implement REMD algorithms with a large number of exchanged parameters simultaneously providing a scalable platform with concealed simulation details.
 
 
 \chapter{Software Testing Framework}
 
 %\section{Importance of Software Testing Framework}
-Software testing is the primary way to improve software reliability. Software faults and errors may cause huge financial damage. Automatic software testing reduces human efforts by testing the functionality and generating the output reports. This thesis mainly focuses on the development of a testing framework for the projects under Radical Cybertools Group such as EnsembleMD toolkit and RepEx framework. The earlier chapter focuses on the EnsembleMD toolkit, its kernels, its patterns and underlying Radical-Pilot framework. It also concentrates on the importance and requirement of RepEx framework to enhance the domain of REMD simulations. In this chapter, we will discuss about the types of software testing and importance of such type of testing in the field of computer programming.
+Software testing is the primary way to improve software reliability. Software faults and errors could possibly even cause huge financial damage to users, institutions or corporations. Automatic software testing reduces human efforts by testing the functionality and generating the output reports. This thesis mainly focuses on the development of a testing framework for the projects under Radical Cybertools Group such as EnsembleMD toolkit and RepEx framework. The earlier chapters focused on the EnsembleMD toolkit, its kernels, its patterns and underlying Radical-Pilot framework and concentrated on the importance and requirement of RepEx framework to enhance the domain of REMD simulations. In this chapter, we will discuss the various types of software testing and the importance of each type of testing in the field of computer programming.
 
 \section{Methods of Testing}
 %http://www.dcs.gla.ac.uk/~johnson/teaching/safety/powerpoint/15_Testing.pdf
 %http://www.angelfire.com/nt2/softwarequality/testestxdin.pdf
 %https://www.veracode.com/blog/2013/12/static-testing-vs-dynamic-testing
 
-Edsger W Dijkstra (1930-2002) says,"Testing can prove the presence of errors, but not their absence." In a broader view, testing methods can be divided into two subsections, namely: Static Test and Dynamic Test. These testing methods are also depicted in figure \ref{fig:test_met} for the reference.
+Edsger W Dijkstra (1930-2002) says,"Testing can prove the presence of errors, but not their absence." In a broader view, testing methods can be divided into two subsections, namely: Static Test and Dynamic Test. These testing methods are also depicted in figure \ref{fig:test_met} for reference.
 
 \begin{figure}
   \centering
@@ -394,7 +395,7 @@ Edsger W Dijkstra (1930-2002) says,"Testing can prove the presence of errors, bu
 \end{figure}
 
 \subsection{Static Test}
-In software development and testing, Static testing is technique in which software is tested without executing the code. It gives comprehensive diagnostics for the code. This type of testing mainly has two components \cite{site10}:
+In software development and testing, Static testing is a technique in which software is tested without executing the code. It gives comprehensive diagnostics for the code. This type of testing mainly has two components \cite{site10}:
 \begin{itemize}
 %%http://www.tutorialspoint.com/software_testing_dictionary/static_testing.htm
 	\item \textbf{Code Review:} It is typically used to find and eliminate the errors in the requirements, code, test cases or associated documents. This includes peer reviews.
@@ -402,12 +403,12 @@ In software development and testing, Static testing is technique in which softwa
 \end{itemize}
 
 \section{Dynamic Test}
-This method is used to test the dynamic behavior of the code. It refers to the physical response of the system for various inputs. Unlike Static test method, Dynamic tests require actual compilation and execution of the code. The actual output for the system for a given input is verified against the expected output. A dynamic test monitors system memory, functional behavior, response time, and overall performance of the system. Dynamic test can be further divided into Blackbox test and Whitebox test.
+This method is used to test the dynamic behavior of the code. It refers to the physical response of the system for various inputs. Unlike the Static test method, Dynamic tests require actual compilation and execution of the code. The actual output for the system for a given input is verified against the expected output. A dynamic test monitors system memory, functional behavior, response time, and overall performance of the system. Dynamic test can be further divided into a Blackbox test and a Whitebox test.
 
 \subsection{Blackbox Testing}
 %http://research.ijcaonline.org/volume87/number18/pxc3894024.pdf
 
-Software testing is required to test each module in the code so that maintenance cost can be reduced. Blackbox testing comes into picture when the source code is not available. Blackbox testing completely focuses on the output generated in response to the given input rather than the internal dynamics of the software \cite{ref24}. This focuses on the functionality of the system rather than its implementation and deployment. Figure \ref{fig:bb} shows the block diagram for blackbox testing where the implementation of system under test is unknown. The only known parameters are the input and the expected output according to the system design document.
+Software testing is required to test each module in the code so that maintenance cost can be reduced. Blackbox testing comes into picture when the source code is not available. Blackbox testing completely focuses on the output generated in response to the given input rather than the internal dynamics of the software \cite{ref24}. This focuses on the functionality of the system rather than its implementation and deployment. Figure \ref{fig:bb} shows the block diagram for blackbox testing where the implementation of the system under test is unknown. The only known parameters are the input and the expected output according to the system design document.
 
 \begin{figure}
   \centering
@@ -418,7 +419,7 @@ Software testing is required to test each module in the code so that maintenance
 
 
 \subsection{Whitebox Testing}
-Whitebox testing, in contrast to blackbox testing, includes the knowledge of internal code implementation and code flow. In these types of test, all the individual paths, loops in the code structure and all the functions and methods are tested for their logical correctness. Whitebox testing is an important part of software development cycle of any developing software. A test engineer is required to have a full knowledge of the source code. These tests might be useful in detecting hidden errors, check dead code or other code related bugs \cite{ref25}.
+Whitebox testing, in contrast to blackbox testing, includes the knowledge of internal code implementation and code flow. In these types of test, all the individual paths, loops in the code structure and all the functions and methods are tested for their logical correctness. Whitebox testing is an important part of the software development cycle of any developing software. A test engineer is required to have a full knowledge of the source code. These tests might be useful in detecting hidden errors, check dead code or other code related bugs \cite{ref25}.
 
 \begin{comment}
 
@@ -430,8 +431,8 @@ Testing in EnsembleMD toolkit starts right from the resource allocation to the e
 
 
 
-\section{Python Testing tools}
-This section focuses on the study of different python testing tools and selection of the most suitable tool for the testing framework. EnsembleMD toolkit is a python based framework and hence, Pytest is the most suitable testing tool for the same. The other tools for testing python framework are python unittest/PyUnit, doctest, nose etc which are discussed briefly below.
+\section{Python Testing Tools}
+This section focuses on the study of different Python testing tools and selection of the most suitable tool for the testing framework. EnsembleMD toolkit is a Python based framework and hence, Pytest is the most suitable testing tool for the same. The other tools for testing python framework are python unittest/PyUnit, doctest, nose etc which are discussed briefly below.
 
 %http://quintagroup.com/cms/python/python-unit-testing
 \subsection{Python unittest/ PyUnit}
@@ -506,7 +507,7 @@ OK
 \end{lstlisting}
 
 \subsection{Pytest}
-Py.test is easy and has straightforward asserting with the assert statements. The output description of pytest is better than other test frameworks. It provides better description whenever the test case fails. Pytest framework has its own runner method to execute the tests with name test\_*.py.
+Py.test is easy and has straightforward asserting with the assert statements. The output description of pytest is better than other test frameworks. It provides a better description whenever the test case fails. Pytest framework has its own runner method to execute the tests with name test\_*.py.
 
 %\begin{minted}[frame=lines,framesep=15pt]{python}
 \begin{lstlisting}[language=Python]
@@ -535,10 +536,10 @@ test_sample.py:5: AssertionError
 ======= 1 failed in 0.12 seconds ========
 \end{lstlisting}
 
-The above results and the output of Pytest is more descriptive and hence, serves as the backbone for our testing framework over the other available test tools. Pytest not only provides better output logging, but also has simpler syntax, easy to implement and easy to integrate with continuous integration tools such as Jenkins or code coverage tools.
+The above results and the output of Pytest is more descriptive and hence, serves as the backbone for our testing framework over the other available test tools. Pytest not only provides better output logging, but also has simpler syntax, is easy to implement and ieasy to integrate with continuous integration tools such as Jenkins or code coverage tools.
 
 \section{EnsembleMD and Repex Test Automation Framework Requirements}
-The previous sections discusses about the different types of testing methods and tools available and superiority of pytest over other testing tools. This section aims at the basic test structure and requirements of our test infrastructure.
+The previous sections discuss the different types of testing methods and tools available and superiority of pytest over other testing tools. This section aims at the basic test structure and requirements of our test infrastructure.
 
 \subsection{High Level Requirements}
 The basic requirement of any test framework, especially EnsembleMD and RepEx framework, is described in the table \ref{table1}.
@@ -548,7 +549,7 @@ The basic requirement of any test framework, especially EnsembleMD and RepEx fra
 \def\arraystretch{2}
 \begin{tabular}{|l| p{10cm}|}
 \hline
-Automatic Test Execution & The primary requirement of test framework is to execute test automatically along with error reporting, test analysis and test report generation. \\ 
+Automatic Test Execution & The primary requirement of the test framework is to execute the test automatically along with error reporting, test analysis and test report generation. \\ 
 \hline
 Convenience & Framework must be easy and convenient to use by the testers/ developers and must be easy to edit and add more tests. \\ 
 \hline
@@ -572,10 +573,10 @@ The flows chart in figure \ref{fig:flowchart} depicts the capabilities of a test
 \begin{itemize}
 
 \item \textbf{Starting or Stopping tests}\newline
-As EnsembleMD toolkit and RepEx are evolving open source projects, where functionalities, APIs and source code is always changing and modifying, it is important for the test infrastructure to start testing the updated source code with any new pushed changes automatically. This ensures that the functionality of the overall system is intact and flawless. The framework should also start executing these tests at some frequent intervals to ensure that even software upgarde on the remote HPC clusters are properly captured and source code of scientific applications is modified accordingly to make it compatible with the upgrades..
+As EnsembleMD toolkit and RepEx are evolving open source projects, where functionalities, APIs and source code is always changing and and modified, it is important for the test infrastructure to start testing the updated source code with any new pushed changes automatically. This ensures that the functionality of the overall system is intact and flawless. The framework should also start executing these tests at some frequent intervals to ensure that even a software upgrade on the remote HPC clusters are properly captured and source code of scientific applications is modified accordingly to make it compatible with the upgrades.
 
 \item \textbf{Test Report Generation}\newline
-Test reports generated after each automated testing is very crucial and important. These test reports are not only important for test engineers, but also significant for the developers. Test report elucidates developers about the failing modules. These reports provide steps or inputs to reproduce the error which is beneficial at the later stage to re-test the bug-fix provided by the developers. 
+Test reports generated after each automated testing is very crucial. These test reports are not only important for test engineers, but also significant for the developers. Test reports elucidates developers about the failing modules. These reports provide steps or inputs to reproduce the error which is beneficial at the later stage to re-test the bug-fix provided by the developers. 
 
 \item \textbf{Verifying Test Results}\newline
 Verifying the test results is the integral part of test execution. Tests can be verified by comparing the actual output with the predefined expected output.
@@ -585,9 +586,6 @@ The essential part of any test execution is to verify and handle the failures. T
 
 \end{itemize}
 
-
-
-
 The complete design of testing framework and the error detection is divided into 3 levels:
 
 \begin{itemize}
@@ -596,17 +594,17 @@ The complete design of testing framework and the error detection is divided into
 \item \textbf{Run-time testing:} This level of testing framework deals with the execution failure of scientific tools due to various reasons which is discussed in further chapters. 
 \end{itemize}
 
-In our testing framework, Development level testing includes unit testing of all the independent functionalities of EnsembleMD tool kit and RepEx framework which is discussed in next chapter. We have designed Simple Application Testing Lite (SATLite), an independent framework for testing deployment and run-time level errors and faults. SATLite detects the errors using console logs of the supercomputer.
+In our testing framework, Development level testing includes unit testing of all the independent functionalities of EnsembleMD tool kit and RepEx framework which is discussed in the next chapter. We have designed Simple Application Testing Lite (SATLite), an independent framework for testing deployment and run-time level errors and faults. SATLite detects the errors using console logs of the supercomputer.
 
 
 %Chapter 5
 \chapter{Development-level Testing}
 
 \section{Introduction}
-Previous chapter briefly discusses about the various testing tools and design features required for developing a test infrastructure for the EnsembleMD toolkit and RepEx. This chapter focuses mainly on the API level testing of all the patterns APIs, kernel APIs and execution handler APIs of EnsembleMD toolkit. The testing infrastructure is divided into Unit Testing, End to End Testing and Exception testing which are described in detail in this chapter.
+The previous chapter briefly discussed the various testing tools and design features required for developing a test infrastructure for the EnsembleMD toolkit and RepEx. This chapter focuses mainly on the API level testing of all the patterns APIs, kernel APIs and execution handler APIs of EnsembleMD toolkit. The testing infrastructure is divided into Unit Testing, End to End Testing and Exception testing which are described in detail in this chapter.
 
 \section{Unit Testing}
-Unit tests are written and executed by the developers to ensure that the output of the code meets the design of the software. In the field of software programming, unit testing is method to test the individual modules or units of the code to verify its proper functioning. 
+Unit tests are written and executed by the developers to ensure that the output of the code meets the design of the software. In the field of software programming, unit testing is a method to test the individual modules or units of the code to verify its proper functioning. 
 
 Pytest was chosen because of the following features:
 \begin{itemize}
@@ -618,9 +616,9 @@ Pytest was chosen because of the following features:
 All the different APIs of all the patterns forms the building block of EnsembleMD toolkit. Different APIs of a pattern can execute as an individual module with or without data dependency from previous stages. In general, Unit Testing for EnsembleMD toolkit pattern is divided into three modules as shown in figure \ref{fig:ut}, namely: 
 
 \begin{itemize}
-\item \textbf{Basic Api Test module:} It tests the basic APIs of the patterns viz import module test, name API or permutation API etc.
-\item \textbf{Not Implemented Error test module:} The important feature of EnsembleMD toolkit is to generate error and throw exception when the pattern API or function is not defined or given any functionality. In this case, toolkit raises \texttt{NotImplementedError} error. In this module, we test for the function definition and the exceptions raised. 
-\item \textbf{Implemented API module:} In this module, we define the APIs of the pattern and provide them functionality. These functions are given required inputs and are tested for the expected output. This tests all those APIs which generated NotImplementedError by defining them and executing them with specific input data or files.
+\item \textbf{Basic Api Test module:} It tests the basic APIs of the patterns viz import module test, name of the pattern, check the variables etc.
+\item \textbf{Not Implemented Error test module:} The important feature of EnsembleMD toolkit is to generate error and throw exception when the pattern API or function is not defined or given any functionality. In this case, toolkit raises \texttt{NotImplementedError} error. In this module, we test the function without definition and the exceptions raised. 
+\item \textbf{Implemented API module:} In this module, we define the APIs of the pattern and provide them functionality. These functions are given required inputs and are tested for the expected output. This tests all of the APIs which generated \texttt{NotImplementedError} by defining them and executing them with specific input data or files.
 \end{itemize}
 
 \begin{figure}
@@ -795,9 +793,9 @@ deallocate()
 
 
 \subsection{Unit test for RepEx toolkit}
-Unlike EnsembleMD toolkit, RepEx framework is a modifiable and scalable REMD simulation package that supports Amber and NAMD as molecular dynamics application kernels. The most important stage in any replica exchange simulation is the initialization of the replicas and the number of replicas in each dimensional group. Errors propagates to next stages if the initialization of replicas is faulty and hence providing erroneous results. These errors in the final output might cause severe damages if the results are used in the development of drugs [1].
+Unlike EnsembleMD toolkit, RepEx framework is a modifiable and scalable REMD simulation package that supports Amber and NAMD as molecular dynamics application kernels. The most important stage in any replica exchange simulation is the initialization of the replicas and the number of replicas in each dimensional group. Errors propagate to the next stage if the initialization of replicas is faulty and hence providing erroneous results. These errors in the final output might cause severe damages if the results are used in the development of drugs [1].
 
-As discussed earlier, RepEx supports one dimensional simulations with temperature exchange, umbrella sampling and salt concentration. These one dimensional simulations can be combined to perform multidimensional exchange simulations.The test cases for the RepEx majorly focus on the replica initialization part. Table \ref{repexapitable} shows the important test cases scenarios of RepEx. These test cases are executed for all the dimensions for all the possible combinations; moreover, these test cases also checks for errors in synchronous and asynchronous modes of execution.
+As discussed earlier, RepEx supports one dimensional simulations with temperature exchange, umbrella sampling and salt concentration. These one dimensional simulations can be combined to perform multidimensional exchange simulations. The test cases for the RepEx extensively focuses on the replica initialization part. Table \ref{repexapitable} shows the important test cases scenarios of RepEx. These test cases are executed for all the dimensions for all the possible combinations; moreover, these test cases also checks for errors in synchronous and asynchronous modes of execution.
 
 \begin{table}
 \begin{center}
@@ -837,10 +835,10 @@ Incorrect numbers would lead to error propagation to next stages and improper ex
 \end{table}
 
 
-\section{End to End Testing}
-End to end testing tests the complete functionality of all the patterns starting from selecting pattern, defining kernel and allocating resource. Each pattern is tested with a specific input and compared with the expected output. These tests ensures the proper functioning and behavior satisfaction of the complete toolkit. The End-to-end testing on different supercomputers helps in establishing reliability of the toolkit. 
+\section{End-to-End Testing}
+End-to-end testing tests the complete functionality of all the patterns starting from the selecting pattern, defining kernel and allocating resource. Each pattern is tested with a specific input and compared with the expected output. These tests ensures the proper functioning and behavior satisfaction of the complete toolkit. The End-to-end testing on different supercomputers helps in establishing reliability of the toolkit. 
 
-End to end testing includes testing all the miscellaneous kernels along with the scientific tool kernels (Amber, CoCo, Gromacs and LSDMap). These tests are executed on both localhost and Stampede supercomputer.
+End-to-end testing includes testing all the miscellaneous kernels along with the scientific tool kernels (Amber, CoCo, Gromacs and LSDMap). These tests are executed on both localhost and Stampede supercomputer.
 
 \begin{comment}
 Discussed below is the code snippet for End-to-end test for pipeline pattern.
@@ -928,7 +926,7 @@ os.remove("./analysis-1-1.dat")
 
 
 \section{Exception Testing}
-EnsembleMD toolkit and RepEx provides a well detailed logging for the errors and exceptions. It generates very specific exceptions which helps in debugging the failure at any step. We provide wrong or improper inputs to check if these exceptions are raised. Table \ref{exception} shows important exceptions provided by the two Radical toolkits.
+The EnsembleMD toolkit and RepEx provides a well detailed logging for the errors and exceptions. It generates very specific exceptions which helps in debugging the failure at any step. We provide wrong or improper inputs to check if these exceptions are raised. Table \ref{exception} shows important exceptions provided by the two Radical toolkits.
 
 \begin{table}
 \begin{center}
@@ -1001,10 +999,10 @@ Chapter \ref{chap:background} profoundly discusses about the features and design
 
 Deployment testing is the next level of testing that captures the exceptions, faults and errors that might occur during the deployment of input files on HPC cluster or loading the scientific tool specific modules and environment on to the supercomputer. Run-time testing focuses on the exceptions that occur due to system failure or segmentation faults. In this thesis, we have carefully designed a framework that checks for the above discussed levels of testing. Simple Application Testing Lite (SATLite) is primarily developed with an objective to test errors and exceptions which occurs during the execution of scientific tools (Amber, Coco, Gromacs, LSDMap etc) on remote supercomputers. 
 
-According to \cite{ref6}, 1.53\% of the total applications on Blue Waters supercomputer failed because of the system problems. Such system failures has a great impact on the computing resources and monetary funds. Majority of testing tools that have been developed focuses on testing the failures due to system faults, both software and hardware. LogDiver, a tool primarily developed by Martino et al. \cite{ref6} analyzes the system level faults. Failures in HPC clusters have become more prominent with the enhancement in the number of components. The exponential increase in the failures calls for an immediate actions to minimize the effect of failed applications on the high computing resources. In this chapter, we focus on application side failure detection. 
+According to \cite{ref6}, 1.53\% of the total applications on Blue Waters supercomputer failed because of the system problems. Such system failures have a great impact on the computing resources and financial budgeting. The majority of testing tools that have been developed focuses on testing the failures due to system faults, both software and hardware. LogDiver, a tool primarily developed by Martino et al. \cite{ref6} analyzes the system level faults. Failures in HPC clusters have become more prominent with the enhancement in the number of components. The exponential increase in the failures calls for immediate actions to minimize the effect of failed applications on the high computing resources. In this chapter, we focus on application side failure detection. 
 
 \subsection{Basic Definitions}
-Few terms related to the development of testing frameworks are discussed below:
+A few terms related to the development of testing frameworks are discussed below:
 \begin{itemize}
 \item \textbf{Modules:} Basic environment for the default compilers, tools, and libraries. Users requiring 3rd party libraries or tools can tailor their  environment with the applications and tools they need. Module and environment can be used interchangeably.
 
@@ -1015,7 +1013,7 @@ Few terms related to the development of testing frameworks are discussed below:
 \item \textbf{Scientific tools:} These are the MD simulation tools such as Amber, CoCo, Gromacs and LSDMap. These tools are developed by ExTASY group [10].
 \end{itemize}
 
-SATLite tool can help the developers of scientific community, especially Molecular Dynamics community to investigate the errors and issues that may be generated due to their software bugs or the remote system changes and upgrade. This enables them to test the changes which have been made in their tools before releasing it for their users. The errors and exceptions might occur due to below mentions reasons:
+SATLite tool can help the developers of the scientific community, especially the Molecular Dynamics community to investigate the errors and issues that may be generated due to their software bugs or the remote system changes and upgrade. This enables them to test the changes which have been made in their tools before releasing it for their users. The errors and exceptions might occur due to the following occurrences:
 
 \begin{itemize}
 \item Improper or obsolete module loading.
@@ -1026,7 +1024,7 @@ SATLite tool can help the developers of scientific community, especially Molecul
 
 \section{SATLite System Design}
 
-Figure \ref{fig:satdesign} shows the block diagram of system. SATLite tool performs test in two steps, i.e. Module Test and Execution Test. In figure \ref{fig:satdesign}, user attributes field depicts the APIs exposed to the users. These APIs are explained in the later sections. Resource configuration file and scientific tool specific defaults modules file serves as the input to this testing tool. 
+Figure \ref{fig:satdesign} shows the block diagram of the system. SATLite tool performs the test in two steps, i.e. Module Test and Execution Test. In figure \ref{fig:satdesign}, user attributes field depicts the APIs exposed to the users. These APIs are explained in the later sections. Resource configuration file and scientific tool specific defaults modules file serves as the input to this testing tool. 
 
 \begin{figure}
   \centering
@@ -1036,7 +1034,7 @@ Figure \ref{fig:satdesign} shows the block diagram of system. SATLite tool perfo
 \end{figure}
 
 \section{System Architecture}
-As a part of SATLite design and development, primary focus is to report the exceptions and errors occurred due to inadmissible loading of environment or improper input files on the Supercomputer. The continuous development in the scientific tools and changes in their source code raised a requirement to develop a tool that can report any errors relating to its execution on the remote supercomputers.
+As a part of SATLite design and development, the primary focus is to report the exceptions and errors occurred due to inadmissible loading of the environment or improper input files on the supercomputer. The continuous development in the scientific tools and changes in their source code raised a requirement to develop a tool that can report any errors relating to its execution on the remote supercomputers.
 
 \begin{figure}
   \centering
@@ -1045,25 +1043,25 @@ As a part of SATLite design and development, primary focus is to report the exce
   \label{fig:satarch}
 \end{figure}
 
-SATLite tool provides a set of explicit APIs to the users to test their own scientific tool or application. It has been currently tested for Amber, CoCo, Gromacs and LSDMap. The environment loading, file transfer, Job scheduler script generation and its execution is hidden from the users, hence, they can solely focus on the development of scientific tools rather than concentrating on debugging the errors and exceptions.
+SATLite tool provides a set of explicit APIs to the users to test their own scientific tool or application. It has been currently tested for Amber, CoCo, Gromacs and LSDMap. The environment loading, file transfer, job scheduler script generation and its execution is hidden from the users, hence, they can solely focus on the development of scientific tools rather than concentrating on debugging the errors and exceptions.
 
 \subsection{Control Flow}
 The control flow for two stages of the SATLite as shown by specific numbers in figure \ref{fig:satarch} are discussed below.
 
 \subsubsection{Module Test}
-\textbf{\{1\}} Load user provided or defaults modules on the supercomputer and wait for the console logs. If user does not explicitly provides any input modules, then the default modules from the scientific tool specific file are used. These console logs are examined to check for the errors during environment loading stage. If any error event occurs at this stage, the logs are written to the module\_error log file explaining the possible reason for failure.
+\textbf{\{1\}} Load user provided or defaults modules on the supercomputer and wait for the console logs. If the user does not explicitly provides any input modules, then the default modules from the scientific tool specific file are used. These console logs are examined to check for the errors during the environment loading stage. If any error event occurs at this stage, the logs are written to the module\_error log file explaining the possible reason for failure.
 
 \subsubsection{Execution Test}
 \textbf{\{2\}} Generate job scheduler script using scientific tool executable, modules for a specific remote machine using remote machine configuration file. \newline
-\textbf{\{3\}} All the input files along with the scheduler script is transferred to the remote machine using secure copy protocol (SCP). The errors and exceptions are detected, if any, during file transfer stage. If all the files are transferred successfully, job is submitted to the computing resource queue where the tools waits for execution to complete.\newline
+\textbf{\{3\}} All the input files along with the scheduler script is transferred to the remote machine using secure copy protocol (SCP). The errors and exceptions are detected, if any, during the file transfer stage. If all the files are transferred successfully, the job is submitted to the computing resource queue where the tools waits for execution to complete.\newline
 \textbf{\{4\}} Output files and error files are generated and these log files are examined to detect any failure during execution.\newline
 \textbf{\{5\}} At the last stage, errors are reported back to the users. Also, all the output files and error files are transferred back to the local machine. 
 
-\section{System log collection and processing}
-We begin by examining the details of the cluster, event methodlogy and then its processing.
+\section{System Log Collection and Processing}
+We begin by examining the details of the cluster, event methodology and then its processing.
 
-\subsection{About the cluster: Stampede}
-We have currently tested SATLite on Stampede supercomputer from TACC. Stampede is one of the most powerful supercomputer which went into production in 2013. In 2012, a pre-production configuration of Stampede used 1875 nodes which were then expanded to 6400 node with a total memory of 205 TB. The project was built in partnership with Intel, Mellnox and Dell. Table \ref{stampedespec} shows the technical details of Stampede.
+\subsection{About the Cluster: Stampede}
+We have currently tested SATLite on the Stampede supercomputer from TACC. Stampede is one of the most powerful supercomputers which went into production in 2013. In 2012, a pre-production configuration of Stampede used 1875 nodes which were then expanded to 6400 node with a total memory of 205 TB. The project was built in partnership with Intel, Mellnox and Dell. Table \ref{stampedespec} shows the technical details of Stampede.
 
 \begin{table}
 \begin{center}
@@ -1097,22 +1095,22 @@ Operations & 9.6 quadrillion floating point operations per second
 \end{table}
 
 \subsection{Event Logs and Processing}
-Supercomputers such as Stampede logs all the events that occurs during the complete execution of the application. System logs serves as the repository of the event data. Console logs provide the real-time job status. We have utilized these console logs to detect the deployment time and run-time errors. In deployment stage, it is highly likely that the modules required to run a scientific tool and workflow are erroneous or have become obsolete. The events generated on the console logs are analyzed to provide the explanation of the error.
+Supercomputers such as Stampede logs all the events that occurs during the complete execution of the application. System logs serves as the repository of the event data. Console logs provide the real-time job status. We have utilized these console logs to detect the deployment time and run-time errors. In the deployment stage, it is highly likely that the modules required to run a scientific tool and workflow are erroneous or have become obsolete. The events generated on the console logs are analyzed to provide the explanation of the error.
 
-In the run-time stage also, we have used console logs to extract job id, job status, execution time etc. When a batch job exits \cite{ref6}, Stampede generates an exit code which shows the completion status. A successful and exception-free execution returns ExitCode 0 as return code, otherwise an integer greater than 0 depicting different types of errors and exceptions. It is also possible that a job can finish successfully even if the application has terminated abnormally. To address this case, we have used the actual execution time to complete and checked if it lies in the expected range of completion time.
+In the run-time stage, we have used console logs to extract job id, job status, execution time etc. When a batch job exits \cite{ref6}, Stampede generates an exit code which shows the completion status. A successful and exception-free execution returns ExitCode 0 as return code, otherwise an integer greater than 0 depicting different types of errors and exceptions. It is also possible that a job can finish successfully even if the application has terminated abnormally. To address this case, we have used the actual execution time to complete and checked if it lies in the expected range of completion time.
 
-\section{SATLite tool components}
+\section{SATLite Tool Components}
 The components exposed to the users are discussed below. These components are the parameters that are required to be set using set\_attribute().
 
 \subsection{Scientific Tool Name}
-This is the field where user has to provide the scientific tool name (currently supported scientific tool name are Amber, CoCo, Gromacs and LSDMap) that has to be tested. For example,
+This is the field where the user has to provide the scientific tool name (currently supported scientific tool name are Amber, CoCo, Gromacs and LSDMap) that has to be tested. For example,
 
 \begin{lstlisting}[language=Python,linewidth=3.7cm]
   name = amber
 \end{lstlisting}
 
 \subsection{Resource Name}
-The input to this field is the name of the supercomputer or any target machine where the execution of scientific tool has to be checked. This currently supports SLURM job scheduler. For example,
+The input to this field is the name of the supercomputer or any target machine where the execution of the scientific tool has to be checked. This currently supports SLURM job scheduler. For example,
 
 \begin{lstlisting}[language=Python,linewidth=5.7cm]
  resource = xsede.stampede
@@ -1127,13 +1125,13 @@ The list of input files specific to the scientific tools along with the argument
 \end{lstlisting}
 
 \subsection{Exe}
-This is an optional field where users can provide their executable which then overrides the default executable.
+This is an optional field where the users can provide their executable which then overrides the default executable.
 
 \subsection{User Modules}
 This is an optional field where user can explictly provide the required environments. The in-built modules specific to scientific tools (Amber, CoCO, Gromacs and LSDMap) are used if no user modules are provided.
 
 \subsection{Run-time}
-Users can provide an estimate range for run time to check for additional execution failures if no exit code or error is found. The actual run time of the execution is should lie in the runtime range provided by the user. It is provided in the following format:
+Users can provide an estimate range for run time to check for additional execution failures if no exit code or error is found. The actual run time of the execution should lie in the runtime range provided by the user. It is provided in the following format:
 
 \begin{lstlisting}[language=Python,linewidth=12cm]
  runtime = ["min_time(hh:mm:ss)","max_time(hh:mm:ss)"]
@@ -1177,7 +1175,7 @@ There are two ways for the users to execute the SATLite, namely:
 \end{itemize}
 
 \subsection{Command Line Tool}
-To run SATLite using command line tool, users are required to provide scientific tool name, target remote machine and arguments file or a file with the list of input files that are required for the execution of the scientific tool. Users can also provide optional executable name and module file explicitly. They can also provide optional execution runtime range. It is recommended to provide a runtime range so as to enhance the failure reporting. The resulting invocation of SATLite should be:
+To run SATLite using command line tool, users are required to provide the scientific tool name, target remote machine and arguments file or a file with the list of input files that are required for the execution of the scientific tool. Users can also provide optional executable name and module file explicitly. They can also provide optional execution runtime range. It is recommended to provide a runtime range so as to enhance the failure reporting. The resulting invocation of SATLite should be:
 
 \begin{lstlisting}[language=Python, linewidth=16cm]
  python satlite_exe.py --name <scientific_tool_name> --resource 
@@ -1232,20 +1230,20 @@ if __name__ == "__main__":
      test.run()
 \end{lstlisting}
 
-\section{Features of SATLite tool}
+\section{Features of SATLite Tool}
 This section focuses on various design features of the SATLite tool that makes it a abstraction level scalable solution for detecting deployment and run-time faults.
 
 \begin{itemize}
-\item It is highly scalable as it can test large number of miscellaneous kernels and executable in addition to the scientific tool kernels.
+\item It is highly scalable as it can test a large number of miscellaneous kernels and executables in addition to the scientific tool kernels.
 \item This tool supports multiple independent executions, hence saving user's time in submitting different jobs separately.  
-\item If scientific tools are being tested, users can explicitly provide environment list to load on the remote machine. If the environment list is not provided by the user, tool uses default modules from the scientific tool configuration file. This feature enables the user to override the obsolete environment and module list provided by the tool.
-\item SATLite also detects the error caused due to improper execution of the job leading it to complete execution successfully in unexpected range of time. For instance, the execution of a job with 1000 input files takes 5 seconds to complete on remote machine might returns a successful execution, but, the absolute time to completion is more than the actual time depicts that the execution is erroneous. Users can optionally provide an estimate range for the run-time to check for additional errors and exceptions.
-\item SATLite tool also checks for same files that are required by multiple jobs before transferring them to the remote machine. This limits the number of file transfers to the remote machine, hence saving the resources. 
+\item If scientific tools are being tested, users can explicitly provide an environment list to load on the remote machine. If the environment list is not provided by the user, the tool uses default modules from the scientific tool configuration file. This feature enables the user to override the obsolete environment and module list provided by the tool.
+\item SATLite also detects the error caused due to improper execution of the job leading it to complete execution successfully in an unexpected range of time. For instance, the execution of a job with 1000 input files takes 5 seconds to complete on a remote machine might return a successful execution, but if the absolute time to completion is more than the actual time depicts that execution is erroneous. Users can optionally provide an estimate range for the run-time to check for additional errors and exceptions.
+\item SATLite tool also checks for similar files that are required by multiple jobs before transferring them to the remote machine. This limits the number of file transfers to the remote machine, hence saving resources. 
 \item The errors encountered are also written to the local machine in module\_error log files for further investigation.
 \end{itemize}
 
 \section{Expected Output}
-The main objective of SATLite is detect and report the exeuction errors and exceptions, this sections discusses about the expected output in case of execution failure or success.
+The main objective of SATLite is to detect and report the exeuction errors and exceptions, this section discusses the expected output in case of execution failure or success.
 
 \begin{figure}
   \begin{center}
@@ -1253,7 +1251,7 @@ The main objective of SATLite is detect and report the exeuction errors and exce
   \caption{Failure due to improper module loading}
   \label{fig:modfail}
   \end{center}
-  \floatfoot{In Figure \ref{fig:modfail}, execution failed as the modules required for the execution of Amber on Stampede had errors.}
+  \floatfoot{In Figure \ref{fig:modfail} execution failed as the modules required for the execution of Amber on Stampede had errors.}
 \end{figure}
 
 \begin{figure}
@@ -1262,16 +1260,16 @@ The main objective of SATLite is detect and report the exeuction errors and exce
   \caption{Example of module\_error log file}
   \label{fig:log}
   \end{center}
-  \floatfoot{Figure \ref{fig:log} shows the example of module\_error log file which provides explanation of possible error.}
+  \floatfoot{Figure \ref{fig:log} shows an example of module\_error log file which provides explanation of possible error.}
 \end{figure}
 
 \begin{figure}
   \begin{center}
   \includegraphics[width=15cm,height=16cm]{runtime.png}
-  \caption{Execution failed to complete in estimated time}
+  \caption{Execution failed to complete in the estimated time}
   \label{fig:runtimefail}
   \end{center}
-  \floatfoot{In Figure \ref{fig:runtimefail}, tool reported error as the execution failed to complete in the estimated range provided by the user.}
+  \floatfoot{In Figure \ref{fig:runtimefail}, the tool reported an error as the execution failed to complete in the estimated range provided by the user.}
 \end{figure}
 
 \begin{figure}
@@ -1285,15 +1283,15 @@ The main objective of SATLite is detect and report the exeuction errors and exce
 
 
 \chapter{Continuous Integration}
-Manual testing at times can be a laborious and time consuming process. Sometimes it is not feasible and efficient to test the same modules everytime if small change has been made. This difficulty further increases with the increase in complexity of components in a software product. Even if single component change in such a complex and interdependent system can affect the behavior of other modules. This requires an urgency to implement an automated testing framework that can reduce manual testing work, simultaneously testing all the critical components of the system. Continuous integration is a software engineering principle of rapid and automated development and testing. As discussed by Betz et al. \cite{ref16}, continuous integration and central testing repository helps the developers to identify a broken test case or failure with certain compilers automatically whenever a change is pushed.
+Manual testing at times can be a laborious and time consuming process. Sometimes it is not feasible and efficient to test the same modules everytime if small change have been made. This difficulty further increases with the increase in complexity of components in a software product. Even if a single component change in such a complex and interdependent system can affect the behavior of other modules. This requires an urgency to implement an automated testing framework that can reduce manual testing work, simultaneously testing all of the critical components of the system. Continuous integration is a software engineering principle of rapid and automated development and testing. As discussed by Betz et al. \cite{ref16}, a continuous integration and central testing repository helps the developers to identify a broken test case or failure with certain compilers automatically whenever a change is pushed.
 
 Testing is an inevitable part of any project and it is required to be automated and integral to build process so that developers do not have to manually test every aspect of their code. 
 
 \section{About Continuous Integration}
-The complete source code is required to be pushed on to central repository. GIT is the most common tool used for version control by recent day developers. Github provides online free code repository. Since, the major work done by the scientific community, especially Radical Group is open source, Github becomes an obvious choice for controlling and maintaining our code repository. In continuous integration life cycle, an automated system gets triggered when developers push their revised code on the repository. This system picks up the changes, pull down the code and execute few set of commands to verify that the application still works as expected even after the code modification \cite{ref17}. The most difficult part was to select the continuous integration server which would serve our purpose and execute our development stage unit cases for EnsembleMD and RepEx along with SATLite tool for testing deployment and run-time error reporting. The primary reasons for building automated testing system are: 
+The complete source code is required to be pushed on to central repository. GIT is the most common tool used for version control by recent day developers. Github provides online free code repository. Since, the major work done by the scientific community, especially Radical Group, is open source, Github becomes an obvious choice for controlling and maintaining our code repository. In a continuous integration life cycle, an automated system gets triggered when developers push their revised code on the repository. This system picks up the changes, pulls down the code and execute a few set of commands to verify that the application still works as expected even after the code modification \cite{ref17}. The most difficult part was to select the continuous integration server which would serve our purpose and execute our development stage unit cases for EnsembleMD and RepEx along with SATLite tool for testing deployment and run-time error reporting. The primary reasons for building an automated testing system are: 
 
 \begin{itemize}
-\item \textbf{Time saving:} Developers' major time to test their build can be saved by automating the build and testing phase. 
+\item \textbf{Time saving:} Developers can save a considerable amount of time testing their build by automating the build and test phase.
 
 \item \textbf{Improved software qualities:} Any detected issues can be resolved immediately, hence keeping software in a state where it can be safely released at any time.
 
@@ -1306,7 +1304,7 @@ The complete source code is required to be pushed on to central repository. GIT 
 The software engineering practice of continuous integration was used to create a common build and test environment that integrates the developers’ code into one test environment and hence, errors can be detected on a commit basis \cite{ref26}. This section focuses on the main principles involved in the designing of continuous integration.
 
 \subsubsection{\textbf{A. Maintain a Single Repository}}
-One of the most important aspect of continuous integration is to maintain a single and central repository. This allows to keep a track of multiple files and code changes. Maintaining a single repository can also prevent divergence in the code that lead to difficult to resolve conflicts close to release. 
+One of the most important aspect of continuous integration is to maintain a single and central repository. This allows to keep track of multiple files and code changes. Maintaining a single repository can also prevent divergence in the code that could lead to difficult in resolving conflicts close to release. 
 
 The current EnsembleMD and RepEx development process maintains a common Git repository for the source code. This feature has been extended to maintain a separate repository for the testing framework of the former tools.
 
@@ -1314,13 +1312,13 @@ The current EnsembleMD and RepEx development process maintains a common Git repo
 As projects gets larger and bigger, it becomes important that developers do not spend time in typing commands to compile, build and test the source code. The automated test build software ensures the efficiency and also allows for the easier support for many build options, such as building in virtual environment, execution on multiple supercomputers, etc.
 
 \subsubsection{\textbf{C. Make the Build Self-testing}}
-All the software needs testing to eliminate the source code bugs. Testing in a significant part in software development cycle that validation needs to be automated and integral to the build process. The continuous integration is expected to build the code changes pushed to central repository automatically and execute the testing suit to ensure that it behaves as expected by the developers. 
+All software needs testing to eliminate source code bugs. Testing is a significant part of the software development cycle and validation needs to be automated and integral to the build process. The continuous integration is expected to build the code changes pushed to a central repository automatically and execute the testing suit to ensure that it behaves as expected by the developers. 
 
 \subsubsection{\textbf{D. Frequent Commits}}
-The practices of continuous integration encourages developers to commit their code changes as often as possible. This is beneficial to avoid merge conflicts if two developers are unknowingly modifying the same segment of the code. It is easier to for the developers to merge, move, add or remove the code changes if the commits are more modular. Committing marks a point the history of the code base where developers can switch back and use the changes made.
+The practices of continuous integration encourages developers to commit their code changes as often as possible. This is beneficial to avoid merge conflicts if two developers are unknowingly modifying the same segment of the code. It is easier for the developers to merge, move, add or remove the code changes if the commits are more modular. Committing marks a point in the history of the code base where developers can switch back and use the changes made.
 
 \subsubsection{\textbf{E. Testing in a Clone of Production Environment}}
-It is highly likely that the production environment used by the end user is different from the development or the test environment. The testing environment should be close to production environment. This principle aids to find the errors that may not be present on the developers' machine. 
+It is highly likely that the production environment used by the end user is different from the development or the test environment. The testing environment should be close to the production environment. This principle aids in finding errors that may not be present on the developers' machine. 
 
 \subsubsection{\textbf{F. Build and Test Result Availability}}
 According to this principle, it is important to have a current development and staging build available at all times. Along with the build, the test result availability provides a visibility on the results to the developers.
@@ -1329,7 +1327,7 @@ According to this principle, it is important to have a current development and s
 
 
 \section{Selecting Continuous Integration Server}
-Previous section discusses about the principles and guidelines required to design a complete automated continuous integration server. There are lot of existing and open source CI servers, namely, Jenkins \cite{site5}, GitLab \cite{site6}, Hudson, Cruise Control, TeamCity \cite{site7}, Travis, Cider \cite{ref18} etc. Selecting the best and optimal CI server is the most arduous task. The most suitable continuous integration server should have certain features as discussed in table \ref{feature}. We have conducted a detailed study of the various available CI servers based on various features. Jenkins is Java based most popular CI server which is compatible most of the operating systems and large number of languages. Moreover, it has multiple plug-ins to configure the required system-of-interest. Travis is also commonly used CI server as each project runs in individual virtual machine [23]. Testing open source projects in Travis is free of cost but it charges for private repositories. TeamCity, developed by JetBrains is an excellent paid CI server; whereas, Jenkins is a free open source server. TeamCity is extensively used in large organization. GitLab is more recent application which integrates source code management and CI server but it does not support as many pulgin and languages as supported by Jenkins \cite{ref16}, \cite{ref17}, \cite{ref20}. Table \ref{cicompare} summarizes and compares different CI servers that were considered in the study.
+The previous section discussed the principles and guidelines required to design a complete automated continuous integration server. There are a lot of existing and open source CI servers, namely, Jenkins \cite{site5}, GitLab \cite{site6}, Hudson, Cruise Control, TeamCity \cite{site7}, Travis, Cider \cite{ref18}, etc. Selecting the best and optimal CI server is the most arduous task. The most suitable continuous integration server should have certain features as discussed in table \ref{feature}. We have conducted a detailed study of the various available CI servers based on various features. Jenkins is Java based and is the most popular CI server which is compatible with most of the operating systems and a large number of languages. Moreover, it has multiple plug-ins to configure the required system-of-interest. Travis is also a commonly used CI server where each project runs in an individual virtual machine [23]. Testing open source projects in Travis is free of cost, but there is a charge for private repositories. TeamCity, developed by JetBrains, is an excellent paid CI server; whereas, Jenkins is a free open source server. TeamCity is extensively used in large organizations. GitLab is a more recent application which integrates source code management and a CI server, but it does not support as many plugins and languages as is supported by Jenkins \cite{ref16}, \cite{ref17}, \cite{ref20}. Table \ref{cicompare} summarizes and compares the different CI servers that were considered in the study.
 
 \begin{table}
 \begin{center}
@@ -1422,19 +1420,19 @@ It has features like plugins, clear dashboard, code coverage, easy integration, 
 \end{table}
 \end{comment}
 
-\section{Reasons to select Jenkins}
-The extensive research on which CI server serves our purpose to settle down with Jenkins. Jenkins is very old and extensively used CI server because of the following reasons:
+\section{Reasons to Select Jenkins}
+The extensive research on which CI server serves our purpose has led us to choose Jenkins. Jenkins is very well established and extensively utilized CI server due to the following reasons:
 
 \begin{itemize}
-\item \textbf{Available Plugins:} Jenkins currently supports 392 plug-ins. It is a hub for development of large number of projects and applications due to powerful and diverse functionality.
+\item \textbf{Available Plugins:} Jenkins currently supports 392 plug-ins. It is a hub for the development of a large number of projects and applications due to it's powerful and diverse functionality.
 
 \item \textbf{Cloud-enabled:} Cloudbees provides unlimited cloud space to the Jenkins users to build and test their code.
 
-\item \textbf{Large number of developer:} Jenkins is maintained by large number of developers who were initially member of Hudson CI server. Since, Jenkins has a team of well experienced developers, the software releases and upgrades are most of the time stable.
+\item \textbf{Large number of developer:} Jenkins is maintained by a large number of developers who were initially members of the Hudson CI server. Since Jenkins has a team of well experienced developers, the software releases and upgrades are usually stable.
 \end{itemize}
 
-\section{Jenkins integration}
-Jenkins is the obvious choice for automated test bench integration of our development, deployment and run-time testing of EnsembleMD, RepEx and SATLite tool. Figure \ref{fig:jenkins_process} shows the stages in our Jenkins test process. Following are the generalized steps in integrating testing with Jenkins:
+\section{Jenkins Integration}
+Jenkins is the obvious choice for automated test bench integration of our development, deployment and run-time testing of EnsembleMD, RepEx and SATLite tool. Figure \ref{fig:jenkins_process} shows the stages in our Jenkins test process. The following are the generalized steps in integrating our testing with Jenkins:
 
 \begin{figure}
   \begin{center}
@@ -1445,9 +1443,9 @@ Jenkins is the obvious choice for automated test bench integration of our develo
 \end{figure}
 
 \begin{itemize}
-\item Jenkins job gets triggered whenever changes are pushed into the Github repository or it even builds periodically even if code base in not modified. This periodic build ensures that unmodified codes builds and executes successfully on the remote machines.
+\item Jenkins job gets triggered whenever changes are pushed into the Github repository or builds periodically even if the code base in not modified. This periodic build ensures that unmodified codes build and executes successfully on the remote machines.
 
-\item Jenkins pulls the code from the tool repository and installs the tools in the virtual environment
+\item Jenkins pulls the code from the tool repository and installs the tools in the virtual environment.
 
 \item It then clones the test cases and executes unit test using py.test.
 
@@ -1486,7 +1484,7 @@ Jenkins exploits the characteristics of pytest that displays the possible reason
 
 
 \subsubsection{\textbf{C. Code Coverage}}
-Code coverage is a measure used to describe the extent to which the test code is tested by a test suit. A high code coverage shows that the program has been thoroughly tested and has lower chances of containing software bugs. Figure \ref{fig:cov_table} and Figure \ref{fig:cov_graph} shows code coverage in tabular and graphical format respectively.
+Code coverage is a measure used to describe the extent of which the test code is tested by a test suit. A high code coverage shows that the program has been thoroughly tested and has lower chances of containing software bugs. Figure \ref{fig:cov_table} and Figure \ref{fig:cov_graph} shows code coverage in tabular and graphical format respectively.
 
 \begin{figure}
  \begin{center}
@@ -1535,7 +1533,7 @@ Code coverage is a measure used to describe the extent to which the test code is
 
 
 \subsubsection{\textbf{D. Trend Graph}}
-Trend Graph shows a general trend of success and failures of the builds. More the red area, more is the failure. This type of graph provides a visual effect of the success ratio of the builds. Figure \ref{fig:trend} shows an example of a success-failure trend.
+Trend Graph shows a general trend of success and failures of the builds. The greater the red area, the greater the failure. This type of graph provides a visual effect of the success ratio of the builds. Figure \ref{fig:trend} shows an example of a success-failure trend.
 
 \label{}
 \begin{figure}
@@ -1547,7 +1545,7 @@ Trend Graph shows a general trend of success and failures of the builds. More th
 \end{figure}
 
 \subsubsection{\textbf{E. Code Format}}
-Code formatting of any specific language should be ubiquitous. A properly formatted code is easy to distribute, understand and is universally accepted. Our continuous integration system uses pylint to check the python code formatting using standard PEP 8 (Style Guide for Python Code). Pylint checks the code-line length, checks for proper spacing, checks if imported modules are used, etc. Figure \ref{fig:violation} shows the graphical view of violations in the code formatting. High in the graph represents higher priority of violations that needs to be resolved before any product release. Medium and Low violations has less priority and can be ignored as it includes unused modules or spacing issues. Figure \ref{fig:vio_report} shows an example of the detailed report of the violations with low, medium and high priorities. The report also shows the exact location and reason for the violation.
+Code formatting of any specific language should be ubiquitous. A properly formatted code is easy to distribute, understand and is universally accepted. Our continuous integration system uses pylint to check the python code formatting using standard PEP 8 (Style Guide for Python Code). Pylint checks the code-line length, checks for proper spacing, checks if imported modules are used, etc. Figure \ref{fig:violation} shows the graphical view of violations in the code formatting. The red section in the graph represents a higher priority of violations which needs to be resolved before any product release. Medium and Low violations have less priority and can be ignored as they include unused modules or spacing issues. Figure \ref{fig:vio_report} shows an example of the detailed report of the violations with low, medium and high priorities. The report also shows the exact location and reason for the violation.
 
 \label{}
 \begin{figure}
@@ -1599,12 +1597,12 @@ Hello World & python satlite\_exe.py --name hello --resource xsede.stampede --ex
 \chapter{Conclusion and Future Work}
 
 \section{Conclusion}
-In this research, we tried to address the issue of HPC resource wastage by minimizing the errors right from the development phase of an application. This thesis pivots around the errors in the on-going development of scientific tools especially molecular dynamics packages and simulations such as Amber, CoCo, LSDMap and Gromacs. It also provides a continuous testing framework to test EnsembleMD toolkit and RepEx frameworks which serves as an abstraction tool for MD simulation packages. The intensive study for this thesis focuses on setting up a 3-stage automatic testing and error reporting framework, the three stages being development, deployment and run-time. As reported by several researchers that large amount of HPC resource is wasted due to system failures. Their studies mainly concentrates on the techniques to curtail the errors with supercomputers' perspective. The study in this thesis provides a solution to combat the errors at the application level. Mining and analyzing the system logs is universal approach to develop tool that can automatically detect the error and generate failure reports with proper justification. Although, Oliner et al. \cite{ref14} discusses that the logs from the supercomputers does not provide sufficient information to perform automatic detection of failures. Moreover, the system logs does not provide a real-time status of the application. We have used console logs to detect various parameters such as job id or errors or exit codes.
+In this thesis, we attempted to address the issue of HPC resource wastage by minimizing the errors right from the development phase of an application. This thesis pivots around the errors in the on-going development of scientific tools especially molecular dynamics packages and simulations such as Amber, CoCo, LSDMap and Gromacs. It also provides a continuous testing framework to test EnsembleMD toolkit and RepEx frameworks which serves as an abstraction tool for MD simulation packages. The intensive study for this thesis focuses on setting up a 3-stage automatic testing and error reporting framework, the three stages being development, deployment and run-time. As reported by several researchers, a large amount of HPC resource is wasted due to system failures. Their studies mainly concentrated on techniques to curtail the errors from a supercomputers' perspective. The study in this thesis provides a solution to combat the errors at the application level. Mining and analyzing the system logs is universal approach to develop tool that can automatically detect the error and generate failure reports with proper justification. Although, Oliner et al. \cite{ref14} discusses that the logs from the supercomputers does not provide sufficient information to perform automatic detection of failures. Moreover, the system logs does not provide a real-time status of the application. We have used console logs to detect various parameters such as job id or errors or exit codes.
 
-The unit testing and end to end testing for EnsembleMD and RepEx covered the important APIs and functionalities to check the software and implementation bugs. These toolkits were continuously tested by Jenkins CI server, hence ensuring their stability. We observed that the tests cases we developed could successfully test the proper functioning of EnsembleMD and RepEx and capture the errors in the source code. The development level testing can help in fixing the software bugs right in the development phase. The SATLite tool was able to capture deployment and run-time errors when scientific tools are executed directly on to the supercomputers. This error reporting can help molecular dynamics community and developers to achieve confidence in their simulation packages. We were able to capture environment setup failures, errors due to obsolete modules, input file errors, execution failures or even improper execution. 
+The unit testing and end-to-end testing for EnsembleMD and RepEx covered the important APIs and functionalities to check the software and implementation bugs. These toolkits were continuously tested by Jenkins CI server, hence ensuring their stability. We observed that the test cases we developed could successfully test the proper functioning of EnsembleMD and RepEx and capture the errors in the source code. The development level testing can help in fixing the software bugs right in the development phase. The SATLite tool was able to capture deployment and run-time errors when scientific tools are executed directly on to the supercomputers. This error reporting can help molecular dynamics community and developers to achieve confidence in their simulation packages. We were able to capture environment setup failures, errors due to obsolete modules, input file errors, execution failures or even improper execution. 
 
 \section{Future Work}
-There is much scope in the development of error detection tools to enhance the performance of applications on supercomputing resources. An ideal bug-free application should be tolerant to any system upgrades or changes and should have optimized execution to utilize maximum performance of supercomputers. As the scientific tools are always updating and so as are EnsembleMD and RepEx. There is always a scope to increase the number of test scenarios to check the source code bugs and to establish a confidence in the application. 
+There is a broad scope in the development of error detection tools to enhance the performance of applications on supercomputing resources. An ideal bug-free application should be tolerant to any system upgrades or changes and should have optimized execution to utilize maximum performance of supercomputers. As the scientific tools are continuously updating so are EnsembleMD and RepEx. There is always an opportunity to increase the number of test scenarios to check the source code bugs and to establish a confidence in the application. 
 
 The SATLite tool has been currently developed for SLURM job schedulers and tested on Stampede supercomputer. In future scope, SATLite has to be extended for resources with other job schedular such as PBS. To achieve this, one of the approach could be to use Radical SAGA \cite{ref23},\cite{site9} as an underlying framework as it can handle large number of job schedulers and batch scripts. Moreover, error detection can be improved by translating exit code to text based reporting. A more intensive usage of SATLite with large number of scientific applications can help in expanding this testing framework. The proof-of-concept of SATLite proves to be promising in minimizing the application failures due to software bugs or improper environment loading or incorrect input files. It can be used by the developers and scientists to scrutinize their application before actually releasing it for their users.
 
@@ -1832,3 +1830,4 @@ http://www.tutorialspoint.com/software\_testing\_dictionary/static\_testing.htm
 %\input{vita}
 
 \end{document}
+
