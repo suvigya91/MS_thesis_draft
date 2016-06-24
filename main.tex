@@ -170,7 +170,7 @@ A study by Oliner et al. \cite{ref14} on the system logs from five supercomputer
 
 Analyzing the system logs forms the basis of various testing tools for the HPC clusters. Chen et al. \cite{ref10} have adopted Hidden Markov Model (HMM) \cite{ref11} along with the frequency analysis to predict job residual times. It is beneficial for the job scheduler to predict the status of every job for proper resource management. Chen and group's approach can predict 75\% of the job's running times with an error of less than 200 seconds.  
 
-All of the novel approaches discussed earlier in this section describes the strategies to anatomize the system logs and error log files to detect the system errors. These studies however show how to combat the effect of system failures and predict them to minimize the errors and faults. There is a window of opportunity for further improvement in the efficiency of resources if we can minimize the errors during application job submission. The large sector of computing resources is used by Molecular Dynamics simulations. These applications are responsible for complex simulation and analysis of various molecular structures. There is always a major cost associated if these molecular dynamics applications fail. The scientific simulation workflows such as Amber, CoCo, etc. are the major tools in the field of molecular dynamics domain. These workflows serve as input to various tools such as Radical EnsembleMD and Radical Pilot. With the advancement in these workflows, it is highly possible to have software bugs. In order to minimize the effect of application failures due to source code bugs, improper environment loading or transferring incorrect input files, we have developed a testing tool, \textit{Simple Application Testing Lite (SATLite)} to detect the application deployment level and run-time errors. The developers of scientific workflows can directly check for errors while their software is still under development, before releasing it to their user base. The dependency of these scientific simulation packages on different operating systems and HPC clusters remains undetected unless a full compilation is made, and errors with "make clean" \cite{ref16} can build successfully on a developer's machine, but can fail on user machines. Betz et al. \cite{ref16} have discussed the effect of application bugs with respect to AMBER development in depth. Since, major research in the field of HPC fault-tolerance system uses different logs, we have also used system and console log mining approach for designing our tool. 
+All of the novel approaches discussed earlier in this section describes the strategies to anatomize the system logs and error log files to detect the system errors. These studies however show how to combat the effect of system failures and predict them to minimize the errors and faults. There is a window of opportunity for further improvement in the efficiency of resources if we can minimize the errors during application job submission. The large sector of computing resources is used by Molecular Dynamics simulations. These applications are responsible for complex simulation and analysis of various molecular structures. There is always a major cost associated if these molecular dynamics applications fail. The scientific simulation workflows such as Amber, CoCo, etc. are the major tools in the field of molecular dynamics domain. These workflows serve as input to various tools such as Radical EnsembleMD and Radical Pilot. With the advancement in these workflows, it is highly possible to have software bugs. In order to minimize the effect of application failures due to source code bugs, improper environment loading or transferring incorrect input files, we have developed a testing tool, \textit{Simple Application Testing Lite (SATLite)} to detect the application deployment level and run-time errors. The developers of scientific workflows can directly check for errors while their software is still under development, before releasing it to their user base. The dependency of these scientific simulation packages on different operating systems and HPC clusters remains undetected unless a full compilation is made, and errors with``make clean" \cite{ref16} can build successfully on a developer's machine, but can fail on user machines. Betz et al. \cite{ref16} have discussed the effect of application bugs with respect to AMBER development in depth. Since, major research in the field of HPC fault-tolerance system uses different logs, we have also used system and console log mining approach for designing our tool. 
 
 
 
@@ -207,7 +207,7 @@ Figure \ref{fig:enmd_arch} \cite{site1} shows the architecture of EnsembleMD too
 As discussed in the above steps, EnsembleMD tool architecture comprises of four basic components showcasing the heterogeneous property of the tool that are described in details in subsequent subsections.
 
 \subsection{Execution Patterns}
-MD application control flow can be categorized into a few repeating types. EnsembleMD tool exploits this characteristic to define a high level object describing the control flow or {\em"what to do"} at different stages. An execution pattern represented by \textbf{{1}} in figure \ref{fig:enmd_arch} describes a parameterized container which can hold and execute ensembles. 
+MD application control flow can be categorized into a few repeating types. EnsembleMD tool exploits this characteristic to define a high level object describing the control flow or {\em``what to do"} at different stages. An execution pattern represented by \textbf{{1}} in figure \ref{fig:enmd_arch} describes a parameterized container which can hold and execute ensembles. 
 
 \subsection{Kernel Plugins}
 A Kernel plug-in represented by \textbf{{2}} in figure \ref{fig:enmd_arch} is an object that abstracts a computational task in this toolkit. It represents the instantiation of a specific science tool along with the required software environment. Kernel hide tool-specific peculiarities across different clusters as well as differences between the interfaces of the various MD tools to the extent possible. 
@@ -256,7 +256,7 @@ The Pilot Agents after becoming active on the remote resource, pulls these Compu
 \end{comment}
 
 \section{Patterns in EnsembleMD Toolkit}
-As discussed earlier, the work flow in molecular sciences applications can be categorized into repeating types, motivating the developers to create an abstraction layer called "patterns." EnsembleMD toolkit has four patterns which envelopes almost all the MD applications. The next few subsections will discuss the different types of "pattern.s"
+As discussed earlier, the work flow in molecular sciences applications can be categorized into repeating types, motivating the developers to create an abstraction layer called ``patterns." EnsembleMD toolkit has four patterns which envelopes almost all the MD applications. The next few subsections will discuss the different types of ``patterns."
 
 \subsection{Pipeline}
 A pipeline pattern consists of a sequence of executable stages. The EnsembleMD toolkit pipeline pattern, as shown in figure \ref{fig:pipeline} \cite{site1}, is the primary pattern that consists of a container of independent tasks that contains heterogeneous workloads. The data flow and control mechanism is always unidirectional and follows a linear pattern. Each pipeline stage might have dependency from previous stage and executes independently. 
@@ -385,7 +385,7 @@ Software testing is the primary way to improve software reliability. Software fa
 %http://www.angelfire.com/nt2/softwarequality/testestxdin.pdf
 %https://www.veracode.com/blog/2013/12/static-testing-vs-dynamic-testing
 
-Edsger W Dijkstra (1930-2002) says,"Testing can prove the presence of errors, but not their absence." In a broader view, testing methods can be divided into two subsections, namely: Static Test and Dynamic Test. These testing methods are also depicted in figure \ref{fig:test_met} for reference.
+Edsger W Dijkstra (1930-2002) says,``Testing can prove the presence of errors, but not their absence." In a broader view, testing methods can be divided into two subsections, namely: Static Test and Dynamic Test. These testing methods are also depicted in figure \ref{fig:test_met} for reference.
 
 \begin{figure}
   \centering
@@ -1134,7 +1134,7 @@ This is an optional field where user can explictly provide the required environm
 Users can provide an estimate range for run time to check for additional execution failures if no exit code or error is found. The actual run time of the execution should lie in the runtime range provided by the user. It is provided in the following format:
 
 \begin{lstlisting}[language=Python,linewidth=12cm]
- runtime = ["min_time(hh:mm:ss)","max_time(hh:mm:ss)"]
+ runtime = [``min_time(hh:mm:ss)",``max_time(hh:mm:ss)"]
 \end{lstlisting}
 
 \begin{table}
@@ -1573,19 +1573,19 @@ Code formatting of any specific language should be ubiquitous. A properly format
 \hline
 \rule{0pt}{5pt} \textbf{Application} & \textbf{Command} & \textbf{Remarks} \\[2ex]
 \hline
-Amber & python satlite\_exe.py --name "amber" --resource "xsede.stampede" --arguments amber\_arguments.wcfg & Single executable example. Tested on Stampede.
+Amber & python satlite\_exe.py --name ``amber" --resource ``xsede.stampede" --arguments amber\_arguments.wcfg & Single executable example. Tested on Stampede.
 \\
 \hline
-CoCo & python satlite\_exe.py --name "coco" --resource "xsede.stampede" --arguments coco\_arguments.wcfg & Single executable example. Tested on Stampede.
+CoCo & python satlite\_exe.py --name ``coco" --resource ``xsede.stampede" --arguments coco\_arguments.wcfg & Single executable example. Tested on Stampede.
 \\
 \hline
-Gromacs & python satlite\_exe.py --name "gromacs" --resource "xsede.stampede" --arguments gromacs\_arguments.wcfg & Single executable example. Tested on Stampede.
+Gromacs & python satlite\_exe.py --name ``gromacs" --resource ``xsede.stampede" --arguments gromacs\_arguments.wcfg & Single executable example. Tested on Stampede.
 \\
 \hline
-LSDMap & python satlite\_exe.py --name "lsdmap" --resource "xsede.stampede" --arguments lsdmap\_arguments.wcfg & Single executable example. Tested on Stampede.
+LSDMap & python satlite\_exe.py --name ``lsdmap" --resource ``xsede.stampede" --arguments lsdmap\_arguments.wcfg & Single executable example. Tested on Stampede.
 \\
 \hline
-Hello World & python satlite\_exe.py --name hello --resource xsede.stampede --exe {"icpc","ibrun"} --arguments {"hello\_test1.wcfg","hello\_test2.wcfg"} & Hello world example with multiple executable. Two executable for compiling and executing c++ hello world program. Tested on Stampede.
+Hello World & python satlite\_exe.py --name hello --resource xsede.stampede --exe {``icpc",``ibrun"} --arguments {``hello\_test1.wcfg",``hello\_test2.wcfg"} & Hello world example with multiple executable. Two executable for compiling and executing c++ hello world program. Tested on Stampede.
 \\
 \hline
 \end{tabular}
