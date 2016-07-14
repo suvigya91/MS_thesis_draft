@@ -1,6 +1,9 @@
 # TODO List
 
 - [x] Proof read thesis document.
-- [ ] Add Limitation for generalized mathematical modelling for test execution paths.
-- [ ] Add type of errors
+- [ ] What is specific to MD? Is this tool generalizable?
+- [ ] Distinguish between source and type of errors
+- [ ] Graph Explaination
+- [ ] Graph Resolution Enhancement
 - [ ] Add code coverage
+- [ ] Add Limitation- User study
