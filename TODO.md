@@ -1,9 +1,9 @@
 # TODO List
 
 - [x] Proof read thesis document.
-- [ ] What is specific to MD? Is this tool generalizable?
-- [ ] Distinguish between source and type of errors
+- [x] What is specific to MD? Is this tool generalizable?
+- [x] Distinguish between source and type of errors
 - [ ] Graph Explaination
 - [ ] Graph Resolution Enhancement
-- [ ] Add code coverage
+- [ ] How does user use SATLite
 - [ ] Add Limitation- User study
