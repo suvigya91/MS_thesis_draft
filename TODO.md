@@ -5,5 +5,5 @@
 - [x] Distinguish between source and type of errors
 - [ ] Graph Explaination
 - [ ] Graph Resolution Enhancement
-- [ ] How does user use SATLite
+- [x] How does user use SATLite
 - [ ] Add Limitation- User study
